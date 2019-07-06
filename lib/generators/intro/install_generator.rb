@@ -13,6 +13,14 @@ module Intro
         template 'config/initializers/intro.rb'
       end
 
+      def add_intro_locales
+        directory 'config/locales'
+      end
+
+      def add_routes
+        route 'mount Intro::Engine => "/intro"'
+      end
+
       def add_intro_tours_migration
         migration_template 'db/create_intro_tours.rb.erb',
                            'db/migrate/create_intro_tours.rb',

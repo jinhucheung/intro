@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.summary     = "new feature introduction and step-by-step users guide for your rails application"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", ">= 3.2"
   s.add_dependency "kaminari", ">= 0.17.0"
@@ -22,4 +22,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "factory_bot_rails"
+  s.add_development_dependency "shoulda-matchers"
 end

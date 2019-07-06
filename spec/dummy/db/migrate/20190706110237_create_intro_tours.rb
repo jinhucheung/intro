@@ -1,4 +1,4 @@
-class CreateIntroTours < ActiveRecord::Migration<%= migration_version %>
+class CreateIntroTours < ActiveRecord::Migration
   def change
     create_table :intro_tours do |t|
       t.string   :ident,                null: false
