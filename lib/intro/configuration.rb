@@ -15,6 +15,17 @@ module Intro
     # admin account for accessing background web
     attr_accessor :admin_username, :admin_password
 
+    # admin_authenticated override authenticated process for background web, it should return boolean
+    #
+    # ==== Example
+    #
+    # self.admin_authenticated = -> { current_user.try(:has_admin_role?) }
+    attr_accessor :admin_authenticated
+
+    # redirect to unauthenticated_admin_path if user is failed to authenticated
+    # self.unauthenticated_admin_path = '/login'
+    attr_accessor :unauthenticated_admin_path
+
     def initialize
       @enable = true
 

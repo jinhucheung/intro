@@ -9,12 +9,21 @@ module Intro
       end
 
       def authenticated?
-        session[:intro_admin_authenticated] ||
-        Intro.config.admin_username == params[:username] &&
-        Intro.config.admin_password == params[:password]
+        return @_authenticated if defined?(@_authenticated)
+
+        @_authenticated =
+          if Intro.config.admin_authenticated.respond_to?(:call)
+            instance_exec(&Intro.config.admin_authenticated)
+          else
+            session[:intro_admin_authenticated] ||
+            Intro.config.admin_username == params[:username] &&
+            Intro.config.admin_password == params[:password]
+          end
       end
 
-      alias_method :unauthenticated_path, :new_admin_session_path
+      def unauthenticated_path
+        Intro.config.unauthenticated_admin_path.presence || new_admin_session_path
+      end
     end
   end
 end

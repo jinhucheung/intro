@@ -11,7 +11,16 @@ Intro.configure do
   # after user touches a tour more than max count, the tour doesn't display. default: 1
   # self.max_touch_count = 1
 
-  # admin account for accessing background web, default value by SecureRandom#urlsafe_base64
+  # admin account for accessing background web, default by SecureRandom#urlsafe_base64
   self.admin_username = ENV['INTRO_APP_ADMIN_USERNAME'] || "<%= SecureRandom.urlsafe_base64(5) %>"
   self.admin_password = ENV['INTRO_APP_ADMIN_PASSWORD'] || "<%= SecureRandom.urlsafe_base64(20) %>"
+
+  # admin_authenticated override authenticated process for background web, it should return boolean
+  #
+  # ==== Example
+  #
+  # self.admin_authenticated = -> { current_user.try(:has_admin_role?) }
+
+  # redirect to unauthenticated_admin_path if user is failed to authenticated
+  # self.unauthenticated_admin_path = '/login'
 end

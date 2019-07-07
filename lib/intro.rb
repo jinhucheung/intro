@@ -8,7 +8,7 @@ module Intro
     end
 
     def configure(&block)
-      config.instance_eval(&block)
+      config.instance_exec(&block)
     end
   end
 end
