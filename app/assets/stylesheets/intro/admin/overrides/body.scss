@@ -1,0 +1,21 @@
+@import '../../variables';
+
+.intro-admin__html {
+  height: 100%;
+  font-size: $root-font-size;
+}
+
+.intro-admin__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: $text-color;
+  margin: 0;
+}
+
+.intro-admin__container.center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

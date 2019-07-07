@@ -1,5 +1,6 @@
 require 'rails/generators/migration'
 require 'rails/generators/active_record'
+require 'securerandom'
 
 module Intro
   module Generators
@@ -10,7 +11,7 @@ module Intro
       source_root File.expand_path('../templates', __FILE__)
 
       def add_intro_initializer
-        template 'config/initializers/intro.rb'
+        template 'config/initializers/intro.rb.erb', 'config/initializers/intro.rb'
       end
 
       def add_intro_locales

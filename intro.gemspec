@@ -18,10 +18,12 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 3.2"
   s.add_dependency "kaminari", ">= 0.17.0"
+  s.add_dependency "sass-rails"
   s.add_dependency "shepherdjs_rails", ">= 3.1"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "shoulda-matchers"
+  s.add_development_dependency "byebug"
 end
