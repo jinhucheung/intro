@@ -15,7 +15,7 @@ module Intro
     # admin account for accessing background web
     attr_accessor :admin_username, :admin_password
 
-    # admin_authenticated override authenticated process for background web, it should return boolean
+    # admin_authenticated will override authenticated process for background web, it should return boolean
     #
     # ==== Example
     #

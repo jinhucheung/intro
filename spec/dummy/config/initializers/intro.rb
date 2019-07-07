@@ -12,7 +12,7 @@ Intro.configure do
   self.admin_username = ENV['INTRO_APP_ADMIN_USERNAME'] || "WRDkzl4"
   self.admin_password = ENV['INTRO_APP_ADMIN_PASSWORD'] || "8ud1c_3vU5idynBN1gE8pUDnDVs"
 
-  # admin_authenticated override authenticated process for background web, it should return boolean
+  # admin_authenticated will override authenticated process for background web, it should return boolean
   #
   # ==== Example
   #
