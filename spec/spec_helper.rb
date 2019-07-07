@@ -18,6 +18,8 @@ require File.expand_path('../dummy/config/environment', __FILE__)
 
 require 'factory_bot_rails'
 require 'shoulda/matchers'
+require 'byebug'
+require 'test_helper'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -100,6 +102,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
   config.include FactoryBot::Syntax::Methods
+  config.include TestHelper
 end
 
 Shoulda::Matchers.configure do |config|

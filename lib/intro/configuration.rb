@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 module Intro
   class Configuration
     # switch intro status. all tours don't display if intro is disable. default: true
@@ -15,12 +17,12 @@ module Intro
     # admin account for accessing background web
     attr_accessor :admin_username, :admin_password
 
-    # admin_authenticated will override authenticated process for background web, it should return boolean
+    # admin_authenticate_account will override authenticate_account process for background web, it should return boolean
     #
     # ==== Example
     #
-    # self.admin_authenticated = -> { current_user.try(:has_admin_role?) }
-    attr_accessor :admin_authenticated
+    # self.admin_authenticate_account = -> { current_user.try(:has_admin_role?) }
+    attr_accessor :admin_authenticate_account
 
     # redirect to unauthenticated_admin_path if user is failed to authenticated
     # self.unauthenticated_admin_path = '/login'
@@ -34,6 +36,10 @@ module Intro
       @current_user_method = 'current_user'
 
       @max_touch_count = 1
+    end
+
+    def admin_username_digest
+      @admin_username_digest ||= Digest::SHA1.hexdigest(admin_username.to_s)
     end
   end
 end

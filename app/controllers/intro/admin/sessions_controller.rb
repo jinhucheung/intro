@@ -11,7 +11,7 @@ module Intro
 
       def create
         if authenticated?
-          session[:intro_admin_authenticated] = true
+          session[:intro_admin_authenticated] = Intro.config.admin_username_digest
           redirect_to admin_tours_path
         else
           flash.now.alert = intro_translate('error.sign_in')

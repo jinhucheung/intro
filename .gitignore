@@ -8,3 +8,4 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/.byebug_history
 Gemfile.lock
+.byebug_history

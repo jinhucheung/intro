@@ -12,11 +12,11 @@ Intro.configure do
   self.admin_username = ENV['INTRO_APP_ADMIN_USERNAME'] || "WRDkzl4"
   self.admin_password = ENV['INTRO_APP_ADMIN_PASSWORD'] || "8ud1c_3vU5idynBN1gE8pUDnDVs"
 
-  # admin_authenticated will override authenticated process for background web, it should return boolean
+  # admin_authenticate_account will override authenticate account process for background web, it should return boolean
   #
   # ==== Example
   #
-  # self.admin_authenticated = -> { current_user.try(:has_admin_role?) }
+  # self.admin_authenticate_account = -> { current_user.try(:has_admin_role?) }
 
   # redirect to unauthenticated_admin_path if user is failed to authenticated
   # self.unauthenticated_admin_path = '/login'
