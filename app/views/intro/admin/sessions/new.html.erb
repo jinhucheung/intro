@@ -1,27 +1,28 @@
-<%- content_for :body_class, 'intro-admin_sessions' %>
+<% content_for :doc_title, t('intro.admin.sign_in') %>
+<% content_for :body_class, 'intro-admin_sessions' %>
 
 <div class="intro-admin__container center">
   <div class="intro-admin__box">
     <div class="intro-admin__box-header">
-      <%= intro_translate('admin.title') %>
+      <%= t('intro.admin.title') %>
     </div>
 
     <%= form_tag admin_sessions_path, method: :post, class: 'intro-admin__form' do %>
-      <%- if flash.alert %>
+      <% if flash.alert %>
         <div class="field error">
           <div class="message"><%= flash.alert %></div>
         </div>
       <% end %>
       <div class="field">
-        <%= text_field_tag :username, params[:username], placeholder: intro_translate('admin.username') %>
+        <%= text_field_tag :username, params[:username], placeholder: t('intro.admin.username') %>
       </div>
 
       <div class="field">
-        <%= password_field_tag :password, params[:password], placeholder: intro_translate('admin.password') %>
+        <%= password_field_tag :password, params[:password], placeholder: t('intro.admin.password') %>
       </div>
 
       <div class="field">
-        <%= submit_tag intro_translate('admin.sign_in'), class: 'large' %>
+        <%= submit_tag t('intro.admin.sign_in'), class: 'large' %>
       </div>
     <% end %>
   </div>

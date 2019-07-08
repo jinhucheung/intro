@@ -1,1 +1,44 @@
-hello index
+<% content_for :doc_title, t('intro.admin.tour_list') %>
+<% content_for :box_class, 'intro-admin__box-tours' %>
+<% content_for :box_title, t('intro.admin.tour_list') %>
+<% content_for :box_actions do %>
+  <%= link_to t('intro.admin.add_tour'), new_admin_tour_path %>
+<% end%>
+
+<%= render layout: 'intro/admin/tours/container' do %>
+  <% if @tours.blank? %>
+    <div class='message'>
+      <%= t('intro.admin.none_tours') %>
+    </div>
+  <% else %>
+    <table class='intro-admin__tours'>
+      <thead>
+        <tr>
+          <th>Tour ID</th>
+          <th>Ident</th>
+          <th>Simple route</th>
+          <th>Created time</th>
+          <th>Expired time</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tours.each do |tour| %>
+          <tr class="intro-admin__tours-item <%= 'expired' if tour.expired? %>">
+            <td>tour.id</td>
+            <td>tour.ident</td>
+            <td>tour.simple_route</td>
+            <td>tour.created_at</td>
+            <td>tour.expired_at</td>
+            <td>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="intro-admin__pagination">
+      <%= paginate @tours %>
+    </div>
+  <% end %>
+<% end %>

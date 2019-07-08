@@ -10,12 +10,21 @@ module Intro
     validates :ident, presence: true, uniqueness: true
 
     scope :with_controller_and_action, ->(controller, action) { where(controller_path: controller, action_name: action) }
+    scope :recent, -> { order(created_at: :desc) }
 
     before_save :format_attributes
     before_save :format_options
 
     def expose_attributes
       as_json(only: %i[id ident controller_path action_name options])
+    end
+
+    def simple_route
+      route.is_a?(Hash) && route[:simple]
+    end
+
+    def expired?
+      expired_at && expired_at < Time.now
     end
 
     protected

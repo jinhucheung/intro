@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="intro-admin__html">
   <head>
-    <title><%= yield(:doc_title).presence || intro_translate('admin.title') %></title>
+    <meta charset='utf-8'>
+    <title><%= [yield(:doc_title).presence, t('intro.admin.title')].compact.join(' · ') %></title>
     <%= stylesheet_link_tag    "intro/admin/application", media: "all" %>
     <%= javascript_include_tag "intro/admin/application" %>
     <%= csrf_meta_tags %>

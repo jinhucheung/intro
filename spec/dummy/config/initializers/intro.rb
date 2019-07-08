@@ -18,6 +18,9 @@ Intro.configure do
   #
   # self.admin_authenticate_account = -> { current_user.try(:has_admin_role?) }
 
-  # redirect to unauthenticated_admin_path if user is failed to authenticated
+  # redirect to unauthenticated_admin_path if user is failed to authenticated, default: '/intro/admin/sessions/new'
   # self.unauthenticated_admin_path = '/login'
+
+  # the path for sign out an admin, default: '/intro/admin/sessions/sign_out'
+  # self.sign_out_admin_path = '/logout'
 end

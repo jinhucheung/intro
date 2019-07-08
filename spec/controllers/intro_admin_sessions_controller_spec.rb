@@ -59,4 +59,14 @@ describe Intro::Admin::SessionsController, type: :controller do
       end
     end
   end
+
+  context '#sign_out' do
+    it 'should clear session for signed user' do
+      post :create, { username: Intro.config.admin_username, password: Intro.config.admin_password }
+      expect(session[:intro_admin_authenticated]).not_to be_nil
+
+      delete :sign_out
+      expect(session[:intro_admin_authenticated]).to be_nil
+    end
+  end
 end

@@ -2,6 +2,8 @@ module Intro
   module Admin
     class ApplicationController < ::Intro::ApplicationController
 
+      helper_method :sign_out_admin_path
+
       protected
 
       def authenticate
@@ -29,6 +31,10 @@ module Intro
 
       def unauthenticated_path
         Intro.config.unauthenticated_admin_path.presence || new_admin_session_path
+      end
+
+      def sign_out_admin_path
+        Intro.config.sign_out_admin_path.presence || sign_out_admin_sessions_path
       end
     end
   end

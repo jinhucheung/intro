@@ -3,12 +3,17 @@ en:
     admin:
       title: Intro Admin
       sign_in: Sign in
+      sign_out: Sign out
       username: Username
       password: Password
+      tour_list: Tours
+      edit_tour: Edit tour
+      add_tour: Add tour
+      none_tours: None any tours here
     tour:
       exit: Exit
       complete: Got it
       next: Next
       back: Back
-    error:
+    errors:
       sign_in: Incorrect username or password

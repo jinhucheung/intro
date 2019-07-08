@@ -1,5 +1,6 @@
 require 'intro/engine'
 require 'intro/configuration'
+require 'kaminari'
 
 module Intro
   class << self

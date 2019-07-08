@@ -7,7 +7,13 @@ module Intro
         before_filter :authenticate
       end
 
-      def index; end
+      def index
+        @tours = Intro::Tour.recent.page(params[:page]).per(15)
+      end
+
+      def new
+        @tour = Intro::Tour.new
+      end
     end
   end
 end
