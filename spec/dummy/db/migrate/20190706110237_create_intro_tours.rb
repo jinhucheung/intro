@@ -7,7 +7,6 @@ class CreateIntroTours < ActiveRecord::Migration
       t.text     :route
       t.text     :options
       t.boolean  :posted,               default: false
-      t.datetime :posted_at
       t.datetime :expired_at
       t.timestamps null: false
     end

@@ -1,0 +1,10 @@
+<% content_for :doc_title, t('intro.admin.edit_tour') %>
+<% content_for :box_class, 'intro-admin__box-tour' %>
+<% content_for :box_title do %>
+  <%= link_to '<', admin_tours_path, class: 'intro-admin__box-title-arrow' %>
+  <%= t('intro.admin.edit_tour') %>
+<% end %>
+
+<%= render layout: 'intro/admin/tours/container' do %>
+  <%= render 'intro/admin/tours/form', url: admin_tours_path %>
+<% end %>

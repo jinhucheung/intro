@@ -1,6 +1,7 @@
 require 'intro/engine'
 require 'intro/configuration'
 require 'kaminari'
+require 'rails-ujs'
 
 module Intro
   class << self

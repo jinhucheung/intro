@@ -14,23 +14,26 @@
     <table class='intro-admin__tours'>
       <thead>
         <tr>
-          <th>Tour ID</th>
-          <th>Ident</th>
-          <th>Simple route</th>
-          <th>Created time</th>
-          <th>Expired time</th>
-          <th>Actions</th>
+          <th>ID</th>
+          <th><%= t('intro.admin.tour.ident') %></th>
+          <th><%= t('intro.admin.tour.simple_route') %></th>
+          <th><%= t('intro.admin.tour.created_time') %></th>
+          <th><%= t('intro.admin.tour.expired_time') %></th>
+          <th><%= t('intro.admin.actions') %></th>
         </tr>
       </thead>
       <tbody>
         <% @tours.each do |tour| %>
           <tr class="intro-admin__tours-item <%= 'expired' if tour.expired? %>">
             <td>tour.id</td>
-            <td>tour.ident</td>
-            <td>tour.simple_route</td>
+            <td title="<%= tour.ident %>">tour.ident</td>
+            <td title="<%= tour.simple_route %>">tour.simple_route</td>
             <td>tour.created_at</td>
             <td>tour.expired_at</td>
             <td>
+              <%= link_to (tour.posted? ? t('intro.admin.unpublish') : t('intro.admin.publish')), admin_tour_post_path(tour, post: !tour.posted), method: :put %>
+              <%= link_to t('intro.admin.edit'), edit_admin_tour_path(tour) %>
+              <%= link_to t('intro.admin.delete'), admin_tour_path(tour), method: :delete %>
             </td>
           </tr>
         <% end %>

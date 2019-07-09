@@ -1,6 +1,6 @@
 <% content_for :body_class, 'intro-admin_tours' %>
 
-<div class="intro-admin__container center">
+<div class="intro-admin__container">
   <div class="intro-admin__box <%= yield(:box_class) %>">
     <div class="intro-admin__box-header">
       <div class="intro-admin__box-title">
@@ -10,9 +10,7 @@
       <div class="intro-admin__box-actions">
         <%= yield(:box_actions) %>
 
-        <%= form_tag sign_out_admin_path, method: :delete do %>
-          <%= submit_tag t('intro.admin.sign_out'), class: 'intro-admin__sign-out-button' %>
-        <% end %>
+        <%= link_to t('intro.admin.sign_out'), sign_out_admin_intro_path, method: :delete %>
       </div>
     </div>
 

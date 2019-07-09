@@ -10,6 +10,24 @@ en:
       edit_tour: Edit tour
       add_tour: Add tour
       none_tours: None any tours here
+      publish: Publish
+      unpublish: Unpublish
+      edit: Edit
+      delete: Delete
+      delete_confirm: Are you sure to delete it?
+      submit: Submit
+      test_component: Test component
+      actions: Actions
+      tour:
+        ident: Ident
+        simple_route: Simple route
+        created_time: Created time
+        expired_time: Expired time
+      placeholders:
+        simple_route: Enter the simple route of tour page, e.g. http://localhost:3000/intro/admin
+        strict_route: Tour displays only when the page url is the same as simple route
+        query_params: query parameters
+        tour_ident: Enter the ident of tour
     tour:
       exit: Exit
       complete: Got it

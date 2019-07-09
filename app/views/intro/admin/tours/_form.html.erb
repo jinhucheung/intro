@@ -1,0 +1,47 @@
+<%= form_for @tour, url: url, html: { class: "intro-admin__form intro-admin__tour-form #{yield(:tour_form_class)}" } do |f| %>
+  <% if @tour.errors.any? %>
+    <div class='field error'>
+      <div class='list'>
+        <% @tour.errors.each do |error| %>
+          <div class='item'><%= error %></div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class='fields'>
+    <div class='three wide field'>
+      <%= f.text_field :ident, placeholder: t('intro.admin.placeholders.tour_ident') %>
+    </div>
+
+    <div class='ten wide field'>
+      <%= f.text_field :simple_route, placeholder: t('intro.admin.placeholders.simple_route') %>
+    </div>
+
+    <div class="three wide field">
+      <div class="checkbox">
+        <%= check_box_tag :strict_route, 1, @tour.strict_route? %>
+        <%= label_tag :strict_route, t('intro.admin.placeholders.strict_route') %>
+      </div>
+    </div>
+  </div>
+
+  <div class='three fields <%= 'hide' if @tour.new_record? %>'>
+    <div class='field'>
+      <%= f.text_field :controller_path, placeholder: 'Controller path' %>
+    </div>
+
+    <div class='field'>
+      <%= f.text_field :action_name, placeholder: 'Action name' %>
+    </div>
+
+    <div class='field'>
+      <%= f.text_field :query, value: @tour.route[:query], placeholder: t('intro.admin.placeholders.query_params') %>
+    </div>
+  </div>
+
+  <div class='field'>
+    <%= f.submit t('intro.admin.submit') %>
+    <%= button_tag t('intro.admin.test_component'), type: :button %>
+  </div>
+<% end %>

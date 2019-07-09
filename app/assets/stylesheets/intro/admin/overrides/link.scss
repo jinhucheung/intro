@@ -1,3 +1,8 @@
+@import '../../mixins';
+@import '../../variables';
+
 .intro-admin__body a {
+  @include link-color($link-color);
+
   text-decoration: none;
 }

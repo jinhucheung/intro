@@ -4,6 +4,7 @@ module Intro
     serialize :options, Hash
 
     attr_accessible :ident, :controller_path, :action_name, :options, :route, :posted, :expired_at if Rails::VERSION::MAJOR < 4
+    attr_accessor   :strict_route
 
     has_many :tour_histories, class_name: 'Intro::TourHistory', dependent: :destroy
 
@@ -20,7 +21,11 @@ module Intro
     end
 
     def simple_route
-      route.is_a?(Hash) && route[:simple]
+      route[:simple] rescue nil
+    end
+
+    def strict_route?
+      strict_route || route[:strict] rescue false
     end
 
     def expired?

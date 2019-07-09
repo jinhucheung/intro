@@ -1,9 +1,46 @@
+@import '../variables';
+@import '../mixins';
+
 .intro-admin_tours .intro-admin__box {
-  min-height: 20em;
-  min-width: 55em;
+  margin: 8em auto 0 auto;
+  width: 60em;
 }
 
 .intro-admin_tours .intro-admin__box-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5em;
+  padding-bottom: .6em;
+  border-bottom: 1px solid $border-color;
+}
+
+.intro-admin_tours .intro-admin__box-title {
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+.intro-admin_tours .intro-admin__box-actions {
+  font-size: .9em;
+
+  > *:not(:first-child) {
+    margin-left: 1em;
+  }
+}
+
+.intro-admin__box-tours .message {
+  text-align: center;
+  color: $muted-color;
+}
+
+.intro-admin__box-tour .intro-admin__box-title {
+  display: flex;
+  align-items: center;
+}
+
+.intro-admin__box-tour .intro-admin__box-title-arrow {
+  @include link-color($text-color);
+
+  font-size: .8em;
+  margin-right: .3em;
 }

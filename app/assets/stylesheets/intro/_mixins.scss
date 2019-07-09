@@ -1,0 +1,16 @@
+@mixin link-color($color) {
+  color: $color;
+
+  &:hover {
+    color: mix($color, #fff, 70);
+  }
+  &:active {
+    color: mix($color, #000, 70);
+  }
+}
+
+@mixin a-link-color($color) {
+  a {
+    @include link-color($color);
+  }
+}

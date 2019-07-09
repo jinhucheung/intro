@@ -4,7 +4,9 @@ Intro::Engine.routes.draw do
       delete :sign_out, on: :collection
     end
 
-    resources :tours
+    resources :tours do
+      put :post
+    end
 
     root to: 'tours#index'
   end

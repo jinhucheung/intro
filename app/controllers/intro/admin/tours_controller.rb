@@ -14,6 +14,8 @@ module Intro
       def new
         @tour = Intro::Tour.new
       end
+
+      def post; end
     end
   end
 end
