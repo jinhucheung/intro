@@ -1,0 +1,189 @@
+@import '../../variables';
+@import '../../mixins';
+
+.intro-admin__form {
+  input:not([type='checkbox']), textarea {
+    padding: .8em 1em;
+    outline: none;
+    border: 1px solid $border-color;
+    width: calc(100% - 2em);
+  }
+
+  input[type='submit'] {
+    width: initial;
+  }
+
+  input:focus, textarea:focus {
+    border: 1px solid $prime-color;
+  }
+}
+
+.intro-admin__form {
+  .field:not(:first-child) {
+    margin-top: 1em;
+  }
+
+  .field > label {
+    display: block;
+    font-size: .92em;
+    margin: 0 0 .28em 0;
+  }
+
+  .field.required > label:after {
+    content: '*';
+    color: $red-color;
+    padding-left: .4em;
+  }
+
+  .fields > .field {
+    margin: 0;
+    padding: 0 .5em;
+  }
+
+  .field.error .message {
+    font-size: .85em;
+    padding: .8em 1em;
+    color: $error-color;
+    background: rgba(245, 93, 84, .1);
+    border: 1px solid rgba(245, 93, 84, .2);
+  }
+}
+
+.intro-admin__form {
+  .fields .wide.field {
+    width: 6.25%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .one.wide.field {
+    width: 6.25%;
+  }
+
+  .two.wide.field {
+    width: 12.5%;
+  }
+
+  .three.wide.field {
+    width: 18.75%;
+  }
+
+  .four.wide.field {
+    width: 25%;
+  }
+
+  .five.wide.field {
+    width: 31.25%;
+  }
+
+  .six.wide.field {
+    width: 37.5%;
+  }
+
+  .seven.wide.field {
+    width: 43.75%;
+  }
+
+  .eight.wide.field {
+    width: 50%;
+  }
+
+  .nine.wide.field {
+    width: 56.25%;
+  }
+
+  .ten.wide.field {
+    width: 62.5%;
+  }
+
+  .eleven.wide.field {
+    width: 68.75%;
+  }
+
+  .twelve.wide.field {
+    width: 75%;
+  }
+
+  .thirteen.wide.field {
+    width: 81.25%;
+  }
+
+  .fourteen.wide.field {
+    width: 87.5%;
+  }
+
+  .fifteen.wide.field {
+    width: 93.75%;
+  }
+
+  .sixteen.wide.field {
+    width: 100%;
+  }
+}
+
+.intro-admin__form {
+  .two.fields > .field {
+    width: 50%;
+  }
+
+  .three.fields > .field {
+    width: 33.33333333%;
+  }
+
+  .four.fields > .field {
+    width: 25%;
+  }
+
+  .five.fields > .field {
+    width: 20%;
+  }
+
+  .six.fields > .field {
+    width: 16.66666667%;
+  }
+
+  .seven.fields > .field {
+    width: 14.28571429%;
+  }
+
+  .eight.fields > .field {
+    width: 12.5%;
+  }
+
+  .nine.fields > .field {
+    width: 11.11111111%;
+  }
+
+  .ten.fields > .field {
+    width: 10%;
+  }
+}
+
+.intro-admin__form {
+  .fields {
+    @include flex;
+    @include flex-h;
+    margin: 0em -0.5em 1em;
+  }
+
+  .ui.form .fields > .field {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  .ui.form .fields > .field:first-child {
+    border-left: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+}
+
+.intro-admin__form .intro-admin__hide {
+  display: none;
+}
+
+.intro-admin__tour-form .simple-route-fields {
+  @include flex-align-center;
+}

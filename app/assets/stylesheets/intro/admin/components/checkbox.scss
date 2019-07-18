@@ -1,0 +1,59 @@
+@import '../../variables';
+@import '../../mixins';
+
+.intro-admin__checkbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.intro-admin__checkbox input[type='checkbox'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: none;
+  opacity: 0 !important;
+}
+
+.intro-admin__checkbox > label {
+  cursor: pointer;
+  display: block;
+  font-size: .85em;
+  padding-left: 1.75em;
+}
+
+.intro-admin__checkbox > label:before {
+  content: '';
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+  border: 1px solid $border-color;
+  background: #fff;
+}
+
+.intro-admin__checkbox > label:after {
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  opacity: 0;
+}
+
+.intro-admin__checkbox input[type='checkbox']:checked {
+  & + label:before {
+    background: $prime-color;
+    border-color: $prime-color;
+  }
+
+  & + label:after {
+    content: '\2714';
+    color: #fff;
+    opacity: 1;
+    left: .1em;
+  }
+}

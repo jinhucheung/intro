@@ -9,39 +9,47 @@
     </div>
   <% end %>
 
-  <div class='fields'>
-    <div class='three wide field'>
-      <%= f.text_field :ident, placeholder: t('intro.admin.placeholders.tour_ident') %>
-    </div>
-
-    <div class='ten wide field'>
+  <div class='fields simple-route-fields'>
+    <div class='twelve wide field'>
+      <%= f.label :ident do %>
+        <%= t('intro.admin.tour.simple_route') %>
+        <i class='intro-admin__question' title="<%= t('intro.admin.tips.simple_route') %>"></i>
+      <% end %>
       <%= f.text_field :simple_route, placeholder: t('intro.admin.placeholders.simple_route') %>
     </div>
 
-    <div class="three wide field">
-      <div class="checkbox">
+    <div class='four wide field'>
+      <div class='checkbox intro-admin__checkbox'>
         <%= check_box_tag :strict_route, 1, @tour.strict_route? %>
-        <%= label_tag :strict_route, t('intro.admin.placeholders.strict_route') %>
+        <%= label_tag :strict_route, t('intro.admin.placeholders.strict_route'), title: t('intro.admin.tips.strict_route') %>
       </div>
     </div>
   </div>
 
-  <div class='three fields <%= 'hide' if @tour.new_record? %>'>
+  <div class='four fields'>
+    <div class='field required'>
+      <%= f.label :ident, t('intro.admin.tour.ident') %>
+      <%= f.text_field :ident, placeholder: t('intro.admin.placeholders.tour_ident'), required: true %>
+    </div>
+
     <div class='field'>
+      <%= f.label :controller_path, 'Controller' %>
       <%= f.text_field :controller_path, placeholder: 'Controller path' %>
     </div>
 
     <div class='field'>
+      <%= f.label :action_name, 'Action' %>
       <%= f.text_field :action_name, placeholder: 'Action name' %>
     </div>
 
     <div class='field'>
+      <%= f.label :action_name, t('intro.admin.tour.query_params') %>
       <%= f.text_field :query, value: @tour.route[:query], placeholder: t('intro.admin.placeholders.query_params') %>
     </div>
   </div>
 
   <div class='field'>
-    <%= f.submit t('intro.admin.submit') %>
-    <%= button_tag t('intro.admin.test_component'), type: :button %>
+    <%= button_tag t('intro.admin.submit'), class: 'intro-admin__button prime', type: :submit %>
+    <%= button_tag t('intro.admin.test'), class: 'intro-admin__button', type: :button %>
   </div>
 <% end %>

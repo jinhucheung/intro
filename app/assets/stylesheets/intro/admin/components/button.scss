@@ -1,0 +1,20 @@
+@import '../../variables';
+
+.intro-admin__button {
+  padding: .8em 1em;
+  outline: none;
+  border: none;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &.prime {
+    color: white;
+    background: $prime-color;
+  }
+
+  &.large {
+    width: 100%;
+  }
+}

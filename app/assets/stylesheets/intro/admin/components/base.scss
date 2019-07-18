@@ -1,0 +1,12 @@
+@import '../../variables';
+
+.intro-admin__hide {
+  display: none;
+}
+
+.intro-admin__question:after {
+  content: '\003F';
+  padding: 0 .2em;
+  font-style: initial;
+  color: $blue-color;
+}

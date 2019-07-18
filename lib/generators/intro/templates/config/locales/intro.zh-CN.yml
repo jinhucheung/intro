@@ -16,18 +16,22 @@ zh-CN:
       delete: 删除
       delete_confirm: 确定要删除此引导？
       submit: 提交
-      test_component: 测试组件
+      test: 测试
       actions: 操作
       tour:
         ident: 标识
         simple_route: 事例路由
         created_time: 创建时间
         expired_time: 过期时间
+        query_params: query 参数
       placeholders:
         simple_route: 输入需要引导页面的事例路由，如 http://localhost:3000/intro/admin
-        strict_route: 仅当引导页面与事例路由相同才出现引导
+        strict_route: 须为事例路由
         query_params: query 参数
         tour_ident: 输入引导标识
+      tips:
+        simple_route: 通过事例路由完善关联的 Controller、Action、标识等信息
+        strict_route: 仅当引导页面与事例路由相同才出现引导
     tour:
       exit: 不再提示
       complete: 我知道了

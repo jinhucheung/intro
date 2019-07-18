@@ -7,9 +7,10 @@
 }
 
 .intro-admin_tours .intro-admin__box-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex;
+  @include flex-align-center;
+  @include flex-pack-justify;
+
   margin-bottom: 1.5em;
   padding-bottom: .6em;
   border-bottom: 1px solid $border-color;
@@ -34,13 +35,13 @@
 }
 
 .intro-admin__box-tour .intro-admin__box-title {
-  display: flex;
-  align-items: center;
+  @include flex;
+  @include flex-align-center;
 }
 
 .intro-admin__box-tour .intro-admin__box-title-arrow {
   @include link-color($text-color);
 
-  font-size: .8em;
+  font-size: 1em;
   margin-right: .3em;
 }
