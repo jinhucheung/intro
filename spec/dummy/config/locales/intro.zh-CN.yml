@@ -9,7 +9,7 @@ zh-CN:
       tour_list: 引导列表
       edit_tour: 编辑引导
       add_tour: 添加引导
-      none_tours: 没有添加任何引导
+      none_tours: 没有任何引导
       publish: 发布
       unpublish: 取消发布
       edit: 编辑
@@ -18,20 +18,63 @@ zh-CN:
       submit: 提交
       test: 测试
       actions: 操作
+      others: 其他
       tour:
         ident: 标识
         simple_route: 事例路由
         created_time: 创建时间
         expired_time: 过期时间
         query_params: query 参数
+        btn_complete_text: 引导完成按钮名称
+        btn_complete_link: 引导完成跳转链接
+      component:
+        name: 组件
+        step: 步骤
+        title: 标题
+        content: 正文
+        image_url: 图片链接
+        image_placement: 图片位置
+        element: 依附元素
+        placement: 依附位置
+        image_placements:
+          top: 上
+          bottom: 下
+          left: 左
+          right: 右
+        placements:
+          top: 上居中
+          top-start: 上左对齐
+          top-end: 上右对齐
+          bottom: 下居中
+          bottom-start: 下左对齐
+          bottom-end: 下右对齐
+          left: 左居中
+          left-start: 左上对齐
+          left-end: 左下对齐
+          right: 右居中
+          right-start: 右上对齐
+          right-end: 右下对齐
       placeholders:
         simple_route: 输入需要引导页面的事例路由，如 http://localhost:3000/intro/admin
         strict_route: 须为事例路由
         query_params: query 参数
         tour_ident: 输入引导标识
+        title: 输入组件标题
+        content: 输入组件正文
+        image_url: 输入图片链接
+        element: 输入依附元素样式，如 .header
+        zindex: 输入组件 z-index
+        fixed_placement: 固定组件以保证依附位置正确
+        btn_visible: 显示按钮
+        overlay_visible: 显示遮罩
+        btn_complete_text: 输入按钮名称
+        btn_complete_link: 输入按钮链接
       tips:
         simple_route: 通过事例路由完善关联的 Controller、Action、标识等信息
         strict_route: 仅当引导页面与事例路由相同才出现引导
+        image_placement: 相对于正文
+        placement: 相对于依附元素
+        fixed_placement: 开启后将不会自动调整位置
     tour:
       exit: 不再提示
       complete: 我知道了

@@ -18,20 +18,63 @@ en:
       submit: Submit
       test: Test
       actions: Actions
+      others: Others
       tour:
         ident: Ident
         simple_route: Simple route
         created_time: Created time
         expired_time: Expired time
         query_params: Query parameters
+        btn_complete_text: Complete button text
+        btn_complete_link: Complete button link
+      component:
+        name: Component
+        step: Step
+        title: Title
+        content: Content
+        image_url: Image url
+        image_placement: Image placement
+        element: Element
+        placement: Placement
+        image_placements:
+          top: Top
+          bottom: Bottom
+          left: Left
+          right: Right
+        placements:
+          top: Top
+          top-start: Top-Start
+          top-end: Top-End
+          bottom: Bottom
+          bottom-start: Bottom-Start
+          bottom-end: Bottom-End
+          left: Left
+          left-start: Left-Start
+          left-end: Left-End
+          right: Right
+          right-start: Right-Start
+          right-end: Right-End
       placeholders:
         simple_route: Enter the simple route of tour page, e.g. http://localhost:3000/intro/admin
         strict_route: Must be simple route
         query_params: query parameters
         tour_ident: Enter the ident of tour
+        title: Enter the title of component
+        content: Enter the content of component
+        image_url: Enter the image url of component
+        element: Enter the CSS selector of element, e.g. .header
+        zindex: Enter the z-index of component
+        fixed_placement: Fixed component to ensure the correct placement
+        btn_visible: Use buttons
+        overlay_visible: Use modal overlay
+        btn_complete_text: Enter the text of button
+        btn_complete_link: Enter the link of button
       tips:
         simple_route: Auto add controller, action, query and ident by simple route
         strict_route: Tour displays only when the page url is the same as simple route
+        image_placement: Reference to the content
+        placement: Reference to the element
+        fixed_placement: It is not auto-adjust placement after turned on
     tour:
       exit: Exit
       complete: Got it

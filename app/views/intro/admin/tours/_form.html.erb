@@ -48,6 +48,41 @@
     </div>
   </div>
 
+  <h4 class='header'><%= t('intro.admin.component.name') %></h4>
+
+  <%= render 'step' %>
+
+  <details class='field'>
+    <summary><%= t('intro.admin.others') %></summary>
+    <div class='intro-admin__form-others'>
+      <div class='field'>
+        <div class='checkbox intro-admin__checkbox'>
+          <%= check_box_tag 'tour[options][overlay_visible]', 1, @tour.options['overlay_visible'] %>
+          <%= label_tag 'tour[options][overlay_visible]', t('intro.admin.placeholders.overlay_visible') %>
+        </div>
+      </div>
+
+      <div class='field'>
+        <div class='checkbox intro-admin__checkbox'>
+          <%= check_box_tag 'tour[options][btn_visible]', 1, @tour.options['btn_visible'].nil? || @tour.options['btn_visible'].to_i > 0 %>
+          <%= label_tag 'tour[options][btn_visible]', t('intro.admin.placeholders.btn_visible') %>
+        </div>
+      </div>
+
+      <div class='two fields'>
+        <div class='field'>
+          <%= label_tag :btn_complete_text, t('intro.admin.tour.btn_complete_text') %>
+          <%= text_field_tag 'tour[options][btn_complete_text]', @tour.options['btn_complete_text'], placeholder: t('intro.admin.placeholders.btn_complete_text') %>
+        </div>
+
+        <div class='field'>
+          <%= label_tag :btn_complete_link, t('intro.admin.tour.btn_complete_link') %>
+          <%= text_field_tag 'tour[options][btn_complete_link]', @tour.options['btn_complete_link'], placeholder: t('intro.admin.placeholders.btn_complete_link') %>
+        </div>
+      </div>
+    </div>
+  </details>
+
   <div class='field'>
     <%= button_tag t('intro.admin.submit'), class: 'intro-admin__button prime', type: :submit %>
     <%= button_tag t('intro.admin.test'), class: 'intro-admin__button', type: :button %>
