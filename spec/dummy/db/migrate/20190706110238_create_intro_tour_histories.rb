@@ -1,8 +1,8 @@
 class CreateIntroTourHistories < ActiveRecord::Migration
   def change
     create_table :intro_tour_histories do |t|
-      t.integer :tour_id, null: false
-      t.integer :user_id, null: false
+      t.references :tour, null: false, index: false
+      t.references :user, null: false, index: false
       t.integer :touch_count, null: false, default: 0
       t.timestamps null: false
     end

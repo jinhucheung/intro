@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20190706110238) do
     t.text     "route"
     t.text     "options"
     t.boolean  "posted",          default: false
-    t.datetime "posted_at"
     t.datetime "expired_at"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
