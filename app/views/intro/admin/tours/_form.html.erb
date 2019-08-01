@@ -54,7 +54,7 @@
 
   <details class='field'>
     <summary><%= t('intro.admin.others') %></summary>
-    <div class='intro-admin__form-others'>
+    <div class='intro-admin__tour-others'>
       <div class='field'>
         <div class='checkbox intro-admin__checkbox'>
           <%= check_box_tag 'tour[options][overlay_visible]', 1, @tour.options['overlay_visible'] %>
@@ -83,7 +83,7 @@
     </div>
   </details>
 
-  <div class='field'>
+  <div class='field intro-admin__tour-actions'>
     <%= button_tag t('intro.admin.submit'), class: 'intro-admin__button prime', type: :submit %>
     <%= button_tag t('intro.admin.test'), class: 'intro-admin__button', type: :button %>
   </div>

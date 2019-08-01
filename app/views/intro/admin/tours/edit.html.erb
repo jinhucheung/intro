@@ -1,7 +1,9 @@
 <% content_for :doc_title, t('intro.admin.edit_tour') %>
 <% content_for :box_class, 'intro-admin__box-tour' %>
 <% content_for :box_title do %>
-  <%= link_to '<', admin_tours_path, class: 'intro-admin__box-title-arrow' %>
+  <%= link_to admin_tours_path, class: 'intro-admin__box-title-arrow' do %>
+    &#8249;
+  <% end %>
   <%= t('intro.admin.edit_tour') %>
 <% end %>
 

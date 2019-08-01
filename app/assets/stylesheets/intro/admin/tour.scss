@@ -1,0 +1,49 @@
+@import '../variables';
+@import '../mixins';
+
+.intro-admin__box-tour .intro-admin__box-title {
+  @include flex;
+  @include flex-align-center;
+}
+
+.intro-admin__box-tour .intro-admin__box-title-arrow {
+  @include link-color($text-color);
+
+  font-size: 1em;
+  margin-right: .3em;
+}
+
+.intro-admin__tour-form .simple-route-fields {
+  @include flex-align-center;
+}
+
+.intro-admin__step {
+  padding: 1em;
+  background: $grey-color;
+  border: 1px solid $border-color;
+}
+
+.intro-admin__step-header {
+  @include flex;
+  @include flex-pack-justify;
+
+  margin-bottom: 1em;
+}
+
+.intro-admin__step-header .title {
+  font-weight: 600;
+}
+
+.intro-admin__step-remove:after {
+  content: '\00d7';
+  color: $muted-color;
+  cursor: pointer;
+}
+
+.intro-admin__tour-others {
+  padding-top: 1em;
+}
+
+.intro-admin__tour-actions {
+  margin-bottom: 1em;
+}

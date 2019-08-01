@@ -75,6 +75,7 @@ zh-CN:
         image_placement: 相对于正文
         placement: 相对于依附元素
         fixed_placement: 开启后将不会自动调整位置
+        remove_step: 移除此步骤
     tour:
       exit: 不再提示
       complete: 我知道了

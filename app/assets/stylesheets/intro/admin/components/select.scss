@@ -1,0 +1,21 @@
+@import '../../variables';
+
+.intro-admin__select {
+  position: relative;
+  overflow: hidden;
+  background: white;
+}
+
+.intro-admin__select select {
+  padding: .74em 1em;
+  width: 100%;
+  border: 1px solid $border-color;
+  box-shadow: none;
+  background: none;
+
+  &:active,
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+}

@@ -6,7 +6,7 @@
   <div class='intro-admin__step-header'>
     <div class='title'><%= "#{t('intro.admin.component.step')}-#{index + 1}" %></div>
     <div class='actions'>
-      <i class='intro-admin__step-remove'></i>
+      <i class='intro-admin__step-remove' title="<%= t('intro.admin.tips.remove_step') %>"></i>
     </div>
   </div>
 
@@ -32,25 +32,29 @@
           <%= t('intro.admin.component.image_placement') %>
           <i class='intro-admin__question' title="<%= t('intro.admin.tips.image_placement') %>"></i>
         <% end %>
-        <%= select_tag "#{step_prefix}[image_placement]", options_for_select(t('intro.admin.component.image_placements').invert.to_a, (step['image_placement'] || 'top')) %>
+        <div class='intro-admin__select'>
+          <%= select_tag "#{step_prefix}[image_placement]", options_for_select(t('intro.admin.component.image_placements').invert.to_a, (step['image_placement'] || 'top')) %>
+        </div>
       </div>
     </div>
 
-    <div class='three fields'>
-      <div class='field'>
+    <div class='fields'>
+      <div class='eight wide field'>
         <%= label_tag :component_element, t('intro.admin.component.element') %>
         <%= text_field_tag "#{step_prefix}[element]", step['element'], placeholder: t('intro.admin.placeholders.element') %>
       </div>
 
-      <div class='field'>
+      <div class='four wide field'>
         <%= label_tag :component_placement do %>
           <%= t('intro.admin.component.placement') %>
           <i class='intro-admin__question' title="<%= t('intro.admin.tips.placement') %>"></i>
         <% end %>
-        <%= select_tag "#{step_prefix}[placement]", options_for_select(t('intro.admin.component.placements').invert.to_a, (step['placement'] || 'top')) %>
+        <div class='intro-admin__select'>
+          <%= select_tag "#{step_prefix}[placement]", options_for_select(t('intro.admin.component.placements').invert.to_a, (step['placement'] || 'top')), class: 'intro-admin__select' %>
+        </div>
       </div>
 
-      <div class='field'>
+      <div class='four wide field'>
         <%= label_tag :component_zindex, 'Z-Index' %>
         <%= number_field_tag "#{step_prefix}[z_index]", step['z_index'] || 99, placeholder: t('intro.admin.placeholders.zindex') %>
       </div>

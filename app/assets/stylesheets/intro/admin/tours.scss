@@ -33,15 +33,3 @@
   text-align: center;
   color: $muted-color;
 }
-
-.intro-admin__box-tour .intro-admin__box-title {
-  @include flex;
-  @include flex-align-center;
-}
-
-.intro-admin__box-tour .intro-admin__box-title-arrow {
-  @include link-color($text-color);
-
-  font-size: 1em;
-  margin-right: .3em;
-}

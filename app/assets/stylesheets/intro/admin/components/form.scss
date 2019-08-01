@@ -23,6 +23,10 @@
     margin-top: 1em;
   }
 
+  .field + .fields {
+    margin-top: 1em;
+  }
+
   .field > label {
     display: block;
     font-size: .92em;
@@ -173,6 +177,7 @@
     padding-left: 0.5em;
     padding-right: 0.5em;
   }
+
   .ui.form .fields > .field:first-child {
     border-left: none;
     -webkit-box-shadow: none;
@@ -182,8 +187,4 @@
 
 .intro-admin__form .intro-admin__hide {
   display: none;
-}
-
-.intro-admin__tour-form .simple-route-fields {
-  @include flex-align-center;
 }

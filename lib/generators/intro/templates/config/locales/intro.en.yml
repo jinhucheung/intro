@@ -25,8 +25,8 @@ en:
         created_time: Created time
         expired_time: Expired time
         query_params: Query parameters
-        btn_complete_text: Complete button text
-        btn_complete_link: Complete button link
+        btn_complete_text: Completed button text
+        btn_complete_link: Completed button link
       component:
         name: Component
         step: Step
@@ -75,6 +75,7 @@ en:
         image_placement: Reference to the content
         placement: Reference to the element
         fixed_placement: It is not auto-adjust placement after turned on
+        remove_step: Remove this step
     tour:
       exit: Exit
       complete: Got it
