@@ -4,9 +4,11 @@
 
 <div class='intro-admin__step'>
   <div class='intro-admin__step-header'>
-    <div class='title'><%= "#{t('intro.admin.component.step')}-#{index + 1}" %></div>
+    <div class='title'><%= t('intro.admin.component.step') %>-<%= content_tag :span, index + 1, class: 'js-intro-step-index' %></div>
     <div class='actions'>
-      <i class='intro-admin__step-remove' title="<%= t('intro.admin.tips.remove_step') %>"></i>
+      <% if index > 0 %>
+        <i class='intro-admin__step-remove' title="<%= t('intro.admin.tips.remove_step') %>"></i>
+      <% end %>
     </div>
   </div>
 
@@ -18,7 +20,7 @@
 
     <div class='field'>
       <%= label_tag :component_content, t('intro.admin.component.content') %>
-      <%= text_area_tag "#{step_prefix}[title]", step['content'], placeholder: t('intro.admin.placeholders.content') %>
+      <%= text_area_tag "#{step_prefix}[content]", step['content'], placeholder: t('intro.admin.placeholders.content'), class: 'content-textarea' %>
     </div>
 
     <div class='two fields'>

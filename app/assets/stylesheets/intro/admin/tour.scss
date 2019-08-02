@@ -17,8 +17,24 @@
   @include flex-align-center;
 }
 
+.intro-admin__tour-others {
+  padding-top: 1em;
+}
+
+.intro-admin__tour-actions {
+  margin-bottom: 1em;
+}
+
+// steps
+
+.intro-admin__steps .add-step-button {
+  background: $grey-color;
+  border: 1px solid $border-color;
+}
+
 .intro-admin__step {
   padding: 1em;
+  margin-bottom: 1em;
   background: $grey-color;
   border: 1px solid $border-color;
 }
@@ -40,10 +56,6 @@
   cursor: pointer;
 }
 
-.intro-admin__tour-others {
-  padding-top: 1em;
-}
-
-.intro-admin__tour-actions {
-  margin-bottom: 1em;
+.intro-admin__step .content-textarea {
+  min-height: 4em;
 }

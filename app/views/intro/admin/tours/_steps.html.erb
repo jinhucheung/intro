@@ -1,0 +1,46 @@
+<div class='intro-admin__steps'>
+  <h4 class='header'><%= t('intro.admin.component.name') %></h4>
+
+  <div class='content'>
+    <% (@tour.options['steps'] || [{}]).each_with_index do |step, index| %>
+      <%= render 'step', step: step, index: index %>
+    <% end %>
+  </div>
+
+  <%= button_tag class: 'intro-admin__button large add-step-button', type: :button do %>
+    &plus;
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var steps   = document.querySelector('.intro-admin__steps')
+
+    // remove step
+    function removeStep (e) {
+      e.target.closest('.intro-admin__step').remove()
+
+      steps.querySelectorAll('.js-intro-step-index').forEach(function (element, index) {
+        element.innerText = index + 1
+      })
+    }
+
+    steps.querySelectorAll('.intro-admin__step-remove').forEach(function (element) {
+      element.addEventListener('click', removeStep)
+    })
+
+    // add step
+    steps.querySelector('.add-step-button').addEventListener('click', function () {
+      var template = document.createElement('div')
+      var content = steps.querySelector('.content')
+      var lastStep = steps.querySelector('.intro-admin__step:last-child .js-intro-step-index')
+      var curIndex = parseInt(lastStep.innerText) + 1
+
+      template.innerHTML = "<%= escape_javascript render('step', index: 1) %>"
+      template.querySelector('.js-intro-step-index').innerText = curIndex
+      template.querySelector('.intro-admin__step-remove').addEventListener('click', removeStep)
+
+      content.appendChild(template.querySelector('.intro-admin__step'))
+    })
+  })
+</script>

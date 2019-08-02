@@ -7,7 +7,7 @@ module Intro
     class InstallGenerator < Rails::Generators::Base
       include ::Rails::Generators::Migration
 
-      desc 'Install Intro base files'
+      desc 'Install intro base files'
       source_root File.expand_path('../templates', __FILE__)
 
       def add_intro_initializer
