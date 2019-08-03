@@ -1,11 +1,15 @@
 <%= form_for @tour, url: url, html: { class: "intro-admin__form intro-admin__tour-form #{yield(:tour_form_class)}" } do |f| %>
   <% if @tour.errors.any? %>
     <div class='field error'>
-      <div class='list'>
-        <% @tour.errors.each do |error| %>
-          <div class='item'><%= error %></div>
+      <div class='message list'>
+        <% @tour.errors.full_messages.each do |message| %>
+          <%= content_tag :div, message, class: 'item' %>
         <% end %>
       </div>
+    </div>
+  <% elsif flash.notice %>
+    <div class='field info'>
+      <%= content_tag :div, flash.notice, class: 'message' %>
     </div>
   <% end %>
 
@@ -15,13 +19,13 @@
         <%= t('intro.admin.tour.simple_route') %>
         <i class='intro-admin__question' title="<%= t('intro.admin.tips.simple_route') %>"></i>
       <% end %>
-      <%= f.text_field :simple_route, placeholder: t('intro.admin.placeholders.simple_route') %>
+      <%= text_field_tag 'tour[route][simple]', @tour.simple_route, placeholder: t('intro.admin.placeholders.simple_route') %>
     </div>
 
     <div class='four wide field'>
       <div class='checkbox intro-admin__checkbox'>
-        <%= check_box_tag :strict_route, 1, @tour.strict_route? %>
-        <%= label_tag :strict_route, t('intro.admin.placeholders.strict_route'), title: t('intro.admin.tips.strict_route') %>
+        <%= check_box_tag 'tour[route][strict]', 1, @tour.strict_route? %>
+        <%= label_tag 'tour[route][strict]', t('intro.admin.placeholders.strict_route'), title: t('intro.admin.tips.strict_route') %>
       </div>
     </div>
   </div>
@@ -44,7 +48,7 @@
 
     <div class='field'>
       <%= f.label :action_name, t('intro.admin.tour.query_params') %>
-      <%= f.text_field :query, value: @tour.route[:query], placeholder: t('intro.admin.placeholders.query_params') %>
+      <%= text_field_tag 'tour[route][query]', @tour.route[:query], placeholder: t('intro.admin.placeholders.query_params') %>
     </div>
   </div>
 
@@ -76,6 +80,13 @@
         <div class='field'>
           <%= label_tag :btn_complete_link, t('intro.admin.tour.btn_complete_link') %>
           <%= text_field_tag 'tour[options][btn_complete_link]', @tour.options['btn_complete_link'], placeholder: t('intro.admin.placeholders.btn_complete_link') %>
+        </div>
+      </div>
+
+      <div class='three fields'>
+        <div class='field'>
+          <%= f.label :expired_at, t('intro.admin.tour.expired_time') %>
+          <%= f.date_field :expired_at %>
         </div>
       </div>
     </div>

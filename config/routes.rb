@@ -5,7 +5,7 @@ Intro::Engine.routes.draw do
     end
 
     resources :tours do
-      put :post
+      put :publish
     end
 
     root to: 'tours#index'

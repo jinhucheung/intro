@@ -44,12 +44,26 @@
     padding: 0 .5em;
   }
 
-  .field.error .message {
+  .field.error .message,
+  .field.info .message {
     font-size: .85em;
     padding: .8em 1em;
+  }
+
+  .field.error .message {
     color: $error-color;
     background: rgba(245, 93, 84, .1);
     border: 1px solid rgba(245, 93, 84, .2);
+  }
+
+  .field.info .message {
+    color: $info-color;
+    background: #f8ffff;
+    border: 1px solid #a9d5de;
+  }
+
+  .field.error .list .item:not(:first-child) {
+    margin-top: .85em;
   }
 }
 

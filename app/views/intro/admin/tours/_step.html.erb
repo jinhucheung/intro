@@ -63,9 +63,9 @@
     </div>
 
     <div class='field'>
-      <div class='checkbox intro-admin__checkbox'>
-        <%= check_box_tag "#{step_prefix}[fixed_placement]", 1, step['fixed_placement'] %>
-        <%= label_tag "#{step_prefix}[fixed_placement]", t('intro.admin.placeholders.fixed_placement'), title: t('intro.admin.tips.fixed_placement') %>
+      <div class='checkbox intro-admin__checkbox js-intro-step-fixed-checkbox'>
+        <%= check_box_tag "#{step_prefix}[fixed_placement]", 1, step['fixed_placement'], id: "intro-admin__step-fixed-#{index}" %>
+        <%= label_tag "#{step_prefix}[fixed_placement]", t('intro.admin.placeholders.fixed_placement'), title: t('intro.admin.tips.fixed_placement'), for: "intro-admin__step-fixed-#{index}" %>
       </div>
     </div>
   </div>

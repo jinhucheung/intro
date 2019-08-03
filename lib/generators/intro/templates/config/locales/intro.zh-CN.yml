@@ -19,6 +19,8 @@ zh-CN:
       test: 测试
       actions: 操作
       others: 其他
+      add_success: 添加成功
+      update_success: 更新成功
       tour:
         ident: 标识
         simple_route: 事例路由
@@ -76,6 +78,7 @@ zh-CN:
         placement: 相对于依附元素
         fixed_placement: 开启后将不会自动调整位置
         remove_step: 移除此步骤
+        tour_not_found: 没有相关引导
     tour:
       exit: 不再提示
       complete: 我知道了

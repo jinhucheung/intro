@@ -21,7 +21,12 @@
       e.target.closest('.intro-admin__step').remove()
 
       steps.querySelectorAll('.js-intro-step-index').forEach(function (element, index) {
-        element.innerText = index + 1
+        var step = element.closest('.intro-admin__step')
+        var curIndex = index + 1
+
+        element.innerText = curIndex
+        step.querySelector('.js-intro-step-fixed-checkbox > input').setAttribute('id', 'intro-admin__step-fixed-' + curIndex)
+        step.querySelector('.js-intro-step-fixed-checkbox > label').setAttribute('for', 'intro-admin__step-fixed-' + curIndex)
       })
     }
 
@@ -32,15 +37,19 @@
     // add step
     steps.querySelector('.add-step-button').addEventListener('click', function () {
       var template = document.createElement('div')
-      var content = steps.querySelector('.content')
+      var content  = steps.querySelector('.content')
       var lastStep = steps.querySelector('.intro-admin__step:last-child .js-intro-step-index')
       var curIndex = parseInt(lastStep.innerText) + 1
 
       template.innerHTML = "<%= escape_javascript render('step', index: 1) %>"
-      template.querySelector('.js-intro-step-index').innerText = curIndex
       template.querySelector('.intro-admin__step-remove').addEventListener('click', removeStep)
+      template.querySelector('.js-intro-step-index').innerText = curIndex
+      template.querySelector('.js-intro-step-fixed-checkbox > input').setAttribute('id', 'intro-admin__step-fixed-' + curIndex)
+      template.querySelector('.js-intro-step-fixed-checkbox > label').setAttribute('for', 'intro-admin__step-fixed-' + curIndex)
 
       content.appendChild(template.querySelector('.intro-admin__step'))
+
+      template.remove()
     })
   })
 </script>

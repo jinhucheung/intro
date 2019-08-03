@@ -31,7 +31,7 @@
             <td>tour.created_at</td>
             <td>tour.expired_at</td>
             <td>
-              <%= link_to (tour.posted? ? t('intro.admin.unpublish') : t('intro.admin.publish')), admin_tour_post_path(tour, post: !tour.posted), method: :put %>
+              <%= link_to (tour.published? ? t('intro.admin.unpublish') : t('intro.admin.publish')), admin_tour_publish_path(tour, published: !tour.published), method: :put %>
               <%= link_to t('intro.admin.edit'), edit_admin_tour_path(tour) %>
               <%= link_to t('intro.admin.delete'), admin_tour_path(tour), method: :delete %>
             </td>

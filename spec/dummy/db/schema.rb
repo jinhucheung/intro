@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20190706110238) do
     t.string   "action_name",     default: "",    null: false
     t.text     "route"
     t.text     "options"
-    t.boolean  "posted",          default: false
+    t.boolean  "published",       default: false
     t.datetime "expired_at"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "intro_tours", ["controller_path", "action_name", "posted"], name: "index_intro_tours_on_controller_and_action_and_posted"
+  add_index "intro_tours", ["controller_path", "action_name", "published"], name: "index_intro_tours_on_controller_and_action_and_published"
   add_index "intro_tours", ["ident"], name: "index_intro_tours_on_ident", unique: true
 
   create_table "users", force: :cascade do |t|

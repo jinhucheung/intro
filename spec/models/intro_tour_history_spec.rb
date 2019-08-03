@@ -1,7 +1,6 @@
 require 'spec_helper'
 require 'shoulda/matchers'
 
-
 describe Intro::TourHistory, type: :model do
   let(:history) { create(:intro_tour_history) }
 
