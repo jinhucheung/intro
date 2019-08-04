@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Jim Cheung"]
   s.email       = ["hi.jinhu.zhang@gmail.com"]
   s.homepage    = "https://github.com/jinhucheung/intro"
-  s.summary     = "new feature introduction and step-by-step users guide for your rails application"
+  s.summary     = "Intro brings your rails application to new feature introduction and step-by-step users guide"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]

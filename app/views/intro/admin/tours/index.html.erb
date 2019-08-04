@@ -32,7 +32,7 @@
             <td><%= tour.expired_at.try(:strftime, '%F') %></td>
             <td>
               <%= link_to t('intro.admin.edit'), edit_admin_tour_path(tour) %>
-              <%= link_to (tour.published? ? t('intro.admin.unpublish') : t('intro.admin.publish')), admin_tour_publish_path(tour, published: !tour.published), method: :put %>
+              <%= link_to (tour.published? ? t('intro.admin.unpublish') : t('intro.admin.publish')), publish_admin_tour_path(tour, published: !tour.published), method: :put %>
               <%= link_to t('intro.admin.delete'), admin_tour_path(tour), method: :delete, data: { confirm: t('intro.admin.tips.delete_tour_confirm') } %>
             </td>
           </tr>

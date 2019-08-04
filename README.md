@@ -1,6 +1,6 @@
 # Intro
 
-Intro add new feature introduction and step-by-step users guide to your rails application.
+Intro brings your rails application to new feature introduction and step-by-step users guide.
 
 ## License
 

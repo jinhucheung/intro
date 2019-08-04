@@ -3,10 +3,10 @@ module Intro
     class ToursController < ::Intro::Admin::ApplicationController
       if Rails::VERSION::MAJOR > 3
         before_action :authenticate
-        before_action :require_tour, except: [:index, :new, :create]
+        before_action :require_tour, except: [:index, :new, :create, :route, :attempt]
       else
         before_filter :authenticate
-        before_filter :require_tour, except: [:index, :new, :create]
+        before_filter :require_tour, except: [:index, :new, :create, :route, :attempt]
       end
 
       def index
@@ -25,6 +25,15 @@ module Intro
         else
           render :new
         end
+      end
+
+      def route
+        render json: { data: Intro::Tour.extract_route(params[:path]) }
+      end
+
+      def attempt
+        tour = Intro::Tour.new(tour_params)
+        render json: { data: tour.expose_attributes }
       end
 
       def show

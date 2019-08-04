@@ -19,7 +19,7 @@
         <%= t('intro.admin.tour.simple_route') %>
         <i class='intro-admin__question' title="<%= t('intro.admin.tips.simple_route') %>"></i>
       <% end %>
-      <%= text_field_tag 'tour[route][simple]', @tour.simple_route, placeholder: t('intro.admin.placeholders.simple_route') %>
+      <%= text_field_tag 'tour[route][simple]', @tour.simple_route, placeholder: t('intro.admin.placeholders.simple_route'), class: 'js-tour-simple-route-input' %>
     </div>
 
     <div class='four wide field'>
@@ -33,22 +33,22 @@
   <div class='four fields'>
     <div class='field required'>
       <%= f.label :ident, t('intro.admin.tour.ident') %>
-      <%= f.text_field :ident, placeholder: t('intro.admin.placeholders.tour_ident'), required: true %>
+      <%= f.text_field :ident, placeholder: t('intro.admin.placeholders.tour_ident'), required: true, class: 'js-tour-ident-input' %>
     </div>
 
     <div class='field'>
       <%= f.label :controller_path, 'Controller' %>
-      <%= f.text_field :controller_path, placeholder: 'Controller path' %>
+      <%= f.text_field :controller_path, placeholder: 'Controller path', class: 'js-tour-controller-input' %>
     </div>
 
     <div class='field'>
       <%= f.label :action_name, 'Action' %>
-      <%= f.text_field :action_name, placeholder: 'Action name' %>
+      <%= f.text_field :action_name, placeholder: 'Action name', class: 'js-tour-action-input' %>
     </div>
 
     <div class='field'>
       <%= f.label :action_name, t('intro.admin.tour.query_params') %>
-      <%= text_field_tag 'tour[route][query]', @tour.route[:query], placeholder: t('intro.admin.placeholders.query_params') %>
+      <%= text_field_tag 'tour[route][query]', @tour.route[:query], placeholder: t('intro.admin.placeholders.query_params'), class: 'js-tour-query-input' %>
     </div>
   </div>
 
@@ -98,3 +98,42 @@
     <%= yield(:form_actions) %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var simpleRouteInput = document.querySelector('.js-tour-simple-route-input')
+    var identInput = document.querySelector('.js-tour-ident-input')
+    var controllerInput = document.querySelector('.js-tour-controller-input')
+    var actionInput = document.querySelector('.js-tour-action-input')
+    var queryInput = document.querySelector('.js-tour-query-input')
+
+    // auto fill ident, controller, action, query input
+    simpleRouteInput.addEventListener('change', function (e) {
+      if (!e.target.value) return
+
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', "<%= route_admin_tours_path %>?path=" + encodeURIComponent(e.target.value))
+      xhr.setRequestHeader('Content-Type', 'application/json')
+      xhr.onload = function () {
+        if (xhr.status !== 200) return
+
+        var res = JSON.parse(xhr.response)
+        var data = res.data
+
+        if (!data) return
+        if (data.source) {
+          controllerInput.value = data.source.controller
+          actionInput.value = data.source.action
+
+          if (/^(([\/\w]+)#(\w+)-.*)|(\s*)$/.test(identInput.value)) {
+            identInput.value = data.source.controller + '#' + data.source.action + '-' + Math.random().toString(36).slice(-6)
+          }
+        }
+        if (data.query) {
+          queryInput.value = data.query
+        }
+      }
+      xhr.send()
+    })
+  })
+</script>
