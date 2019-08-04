@@ -5,6 +5,9 @@
   outline: none;
   border: none;
   cursor: pointer;
+  font-size: .85em;
+  background-color: buttonface;
+  color: buttontext;
 
   &:hover {
     opacity: .8;
@@ -18,4 +21,8 @@
   &.large {
     width: 100%;
   }
+}
+
+.intro-admin__body a.intro-admin__button {
+  color: buttontext;
 }

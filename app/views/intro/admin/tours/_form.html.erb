@@ -95,5 +95,6 @@
   <div class='field intro-admin__tour-actions'>
     <%= button_tag t('intro.admin.submit'), class: 'intro-admin__button prime', type: :submit %>
     <%= button_tag t('intro.admin.test'), class: 'intro-admin__button', type: :button %>
+    <%= yield(:form_actions) %>
   </div>
 <% end %>

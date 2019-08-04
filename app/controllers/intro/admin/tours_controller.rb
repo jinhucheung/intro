@@ -38,7 +38,17 @@ module Intro
         render :edit
       end
 
-      def publish; end
+      def destroy
+        @tour.destroy
+        redirect_to admin_tours_path
+      end
+
+      def publish
+        @tour.update_attributes(published: 'true' == params[:published])
+        redirect_to :back
+      rescue => e
+        redirect_to admin_tours_path
+      end
 
       protected
 
@@ -51,10 +61,10 @@ module Intro
       end
 
       def require_tour
-        @tour = Intro::Tour.find_by_id(params[:id])
+        @tour = Intro::Tour.find_by_id(params[:tour_id].presence || params[:id])
 
         @tour || respond_to do |format|
-          format.html { redirct_to admin_tours_path, alert: t('intro.admin.tips.tour_not_found'), status: :not_found }
+          format.html { redirect_to admin_tours_path, status: :not_found }
           format.any  { head :not_found  }
         end
       end

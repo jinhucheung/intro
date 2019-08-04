@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", ">= 3.2", "< 5.1"
   s.add_dependency "kaminari", ">= 0.17.0"
   s.add_dependency "sass-rails"
-  s.add_dependency "shepherdjs_rails", ">= 3.1"
+  s.add_dependency "shepherdjs_rails", ">= 4.3.3"
   s.add_dependency "rails-ujs"
   s.add_dependency "sprockets"
 

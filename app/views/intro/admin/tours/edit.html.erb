@@ -6,6 +6,12 @@
   <% end %>
   <%= t('intro.admin.edit_tour') %>
 <% end %>
+<% content_for :box_actions do %>
+  <%= link_to t('intro.admin.delete_tour'), admin_tour_path(@tour), method: :delete, data: { confirm: t('intro.admin.tips.delete_tour_confirm') } %>
+<% end %>
+<% content_for :form_actions do %>
+  <%= link_to (@tour.published? ? t('intro.admin.unpublish') : t('intro.admin.publish')), admin_tour_publish_path(@tour, published: !@tour.published), method: :put, class: 'intro-admin__button' %>
+<% end %>
 
 <%= render layout: 'intro/admin/tours/container' do %>
   <%= render 'intro/admin/tours/form', url: admin_tour_path(@tour) %>

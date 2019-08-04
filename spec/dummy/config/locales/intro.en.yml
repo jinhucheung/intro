@@ -9,6 +9,7 @@ en:
       tour_list: Tours
       edit_tour: Edit tour
       add_tour: Add tour
+      delete_tour: Delete tour
       none_tours: None any tours here
       publish: Publish
       unpublish: Unpublish
@@ -78,7 +79,7 @@ en:
         placement: Reference to the element
         fixed_placement: It is not auto-adjust placement after turned on
         remove_step: Remove this step
-        tour_not_found: This tour is not found
+        delete_tour_confirm: Are you sure delete this tour?
     tour:
       exit: Exit
       complete: Got it

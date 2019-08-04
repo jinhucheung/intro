@@ -33,3 +33,32 @@
   text-align: center;
   color: $muted-color;
 }
+
+
+.intro-admin__tours-table {
+  width: 100%;
+
+  th, td {
+    padding: .5em .2em;
+  }
+}
+
+.intro-admin__tours-table td {
+  text-align: center;
+}
+
+.intro-admin__tours-table .ident-column {
+  @include text-truncate;
+
+  max-width: 10em;
+}
+
+.intro-admin__tours-table .simple-route-column {
+  @include text-truncate;
+
+  max-width: 18em;
+}
+
+.intro-admin__tours-item.expired {
+  opacity: .4;
+}

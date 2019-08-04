@@ -11,7 +11,7 @@
       <%= t('intro.admin.none_tours') %>
     </div>
   <% else %>
-    <table class='intro-admin__tours'>
+    <table class='intro-admin__tours-table'>
       <thead>
         <tr>
           <th>ID</th>
@@ -25,15 +25,15 @@
       <tbody>
         <% @tours.each do |tour| %>
           <tr class="intro-admin__tours-item <%= 'expired' if tour.expired? %>">
-            <td>tour.id</td>
-            <td title="<%= tour.ident %>">tour.ident</td>
-            <td title="<%= tour.simple_route %>">tour.simple_route</td>
-            <td>tour.created_at</td>
-            <td>tour.expired_at</td>
+            <td><%= tour.id %></td>
+            <td class='ident-column' title="<%= tour.ident %>"><%= tour.ident %></td>
+            <td class='simple-route-column' title="<%= tour.simple_route %>"><%= tour.simple_route %></td>
+            <td><%= tour.created_at.strftime('%F') %></td>
+            <td><%= tour.expired_at.try(:strftime, '%F') %></td>
             <td>
-              <%= link_to (tour.published? ? t('intro.admin.unpublish') : t('intro.admin.publish')), admin_tour_publish_path(tour, published: !tour.published), method: :put %>
               <%= link_to t('intro.admin.edit'), edit_admin_tour_path(tour) %>
-              <%= link_to t('intro.admin.delete'), admin_tour_path(tour), method: :delete %>
+              <%= link_to (tour.published? ? t('intro.admin.unpublish') : t('intro.admin.publish')), admin_tour_publish_path(tour, published: !tour.published), method: :put %>
+              <%= link_to t('intro.admin.delete'), admin_tour_path(tour), method: :delete, data: { confirm: t('intro.admin.tips.delete_tour_confirm') } %>
             </td>
           </tr>
         <% end %>

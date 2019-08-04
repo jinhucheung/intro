@@ -9,6 +9,7 @@ zh-CN:
       tour_list: 引导列表
       edit_tour: 编辑引导
       add_tour: 添加引导
+      delete_tour: 删除引导
       none_tours: 没有任何引导
       publish: 发布
       unpublish: 取消发布
@@ -78,7 +79,7 @@ zh-CN:
         placement: 相对于依附元素
         fixed_placement: 开启后将不会自动调整位置
         remove_step: 移除此步骤
-        tour_not_found: 没有相关引导
+        delete_tour_confirm: 确认删除此引导？
     tour:
       exit: 不再提示
       complete: 我知道了
