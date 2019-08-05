@@ -17,4 +17,8 @@ Intro::Engine.routes.draw do
 
     root to: 'tours#index'
   end
+
+  resources :tours, only: [:index] do
+    post :record, on: :collection
+  end
 end

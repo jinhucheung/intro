@@ -2,6 +2,7 @@ require 'intro/engine'
 require 'intro/configuration'
 require 'kaminari'
 require 'rails-ujs'
+require 'shepherdjs_rails'
 
 module Intro
   class << self

@@ -94,7 +94,7 @@
 
   <div class='field intro-admin__tour-actions'>
     <%= button_tag t('intro.admin.submit'), class: 'intro-admin__button prime', type: :submit %>
-    <%= button_tag t('intro.admin.test'), class: 'intro-admin__button', type: :button %>
+    <%= button_tag t('intro.admin.test'), class: 'intro-admin__button js-intro-admin__button-test', type: :button %>
     <%= yield(:form_actions) %>
   </div>
 <% end %>
@@ -106,6 +106,9 @@
     var controllerInput = document.querySelector('.js-tour-controller-input')
     var actionInput = document.querySelector('.js-tour-action-input')
     var queryInput = document.querySelector('.js-tour-query-input')
+    var testBtn = document.querySelector('.js-intro-admin__button-test')
+    var form = document.querySelector('.intro-admin__tour-form')
+    var tourBoost
 
     // auto fill ident, controller, action, query input
     simpleRouteInput.addEventListener('change', function (e) {
@@ -134,6 +137,42 @@
         }
       }
       xhr.send()
+    })
+
+    // test tour
+    testBtn.addEventListener('click', function () {
+      if (testBtn.dataset.loading) return
+
+      testBtn.dataset.loading = true
+      tourBoost && tourBoost.hide()
+
+      var data = new FormData(form)
+      data.set('_method', 'POST')
+
+      var xhr = new XMLHttpRequest()
+      xhr.open('POST', "<%= attempt_admin_tours_path %>")
+
+      xhr.onload = function () {
+        testBtn.removeAttribute('data-loading')
+
+        if (xhr.status !== 200) return
+
+        var res = JSON.parse(xhr.response)
+
+        if (res.data) {
+          tourBoost = new window.IntroTourBoost(res.data)
+
+          tourBoost.test({
+            element: '.js-intro-admin__button-test'
+          })
+        }
+      }
+
+      xhr.onerror = function () {
+        testBtn.removeAttribute('data-loading')
+      }
+
+      xhr.send(data)
     })
   })
 </script>
