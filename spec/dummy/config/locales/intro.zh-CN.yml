@@ -87,3 +87,4 @@ zh-CN:
       back: 上一步
     errors:
       sign_in: 用户名或密码错误
+      unauthorized: 用户未登录

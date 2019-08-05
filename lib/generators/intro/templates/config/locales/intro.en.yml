@@ -87,3 +87,4 @@ en:
       back: Back
     errors:
       sign_in: Incorrect username or password
+      unauthorized: It's unauthorized

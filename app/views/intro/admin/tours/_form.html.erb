@@ -147,7 +147,7 @@
       tourBoost && tourBoost.hide()
 
       var data = new FormData(form)
-      data.set('_method', 'POST')
+      data.append('_method', 'POST')
 
       var xhr = new XMLHttpRequest()
       xhr.open('POST', "<%= attempt_admin_tours_path %>")

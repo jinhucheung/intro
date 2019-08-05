@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!introMeta) return
 
   var locale = JSON.parse(introMeta.dataset.locale)
-
   var shepherdOptions = JSON.parse(introMeta.dataset.shepherdOptions)
 
   function TourBoost(tour) {
@@ -176,11 +175,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!self.tour.id) return
 
     var xhr = new XMLHttpRequest()
+    var csrfToken = document.querySelector('meta[name="csrf-token"]')
+
     xhr.open('POST', introMeta.dataset.recordToursPath)
+    csrfToken && xhr.setRequestHeader('X-CSRF-Token', csrfToken.content)
+    xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onload = function () {
       if (xhr.status !== 200) return
 
-      createCookie('intro-tour-' + self.tour.id, (action || 'complete'), 365)
+      createCookie('intro-tour-' + self.tour.id, (action || 'complete'), 7300)
     }
     xhr.send(JSON.stringify({
       id: self.tour.id
