@@ -73,7 +73,7 @@ module Intro
         @tour = Intro::Tour.find_by_id(params[:tour_id].presence || params[:id])
 
         @tour || respond_to do |format|
-          format.html { redirect_to admin_tours_path, status: :not_found }
+          format.html { redirect_to admin_tours_path }
           format.any  { head :not_found  }
         end
       end

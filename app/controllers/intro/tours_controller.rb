@@ -35,7 +35,7 @@ module Intro
 
     def require_tour
       @tour = Intro::Tour.find_by_id(params[:id]) if params[:id].present?
-      head :not_found  unless @tour
+      render json: { message: t('intro.errors.tour_not_found') }, status: :not_found unless @tour
     end
 
     def filter_tours_by_route(tours)
@@ -53,21 +53,20 @@ module Intro
       # filter tours by path paramss
       path_route = Intro::Tour.extract_route(uri.to_s)
       path_selector = lambda do |tour|
-        source = tour.route[:source] || {}
-        path_route.blank? || path_route[:source].except(:controller, :action).keys == source.except(:controller, :action).keys
+        return true if path_route.blank?
+
+        path_route[:source][:action] == tour.action_name &&
+        path_route[:source][:controller] == tour.controller_path &&
+        (tour.route[:source].blank? || path_route[:source].except(:controller, :action).keys == tour.route[:source].except(:controller, :action).keys)
       end
 
       # filter tours by query string
       request_query = Rack::Utils.parse_nested_query(uri.query)
       query_selector = lambda do |tour|
-        if request_query.blank?
-          tour.route[:query].blank?
-        else
-          tour_query = Rack::Utils.parse_nested_query(tour.route[:query])
-          request_query.none? do |key, value|
-            !tour_query.key?(key) || (tour_query[key].present? && tour_query[key] != value)
-          end
-        end
+        return true if tour.route[:query].blank?
+
+        tour_query = Rack::Utils.parse_nested_query(tour.route[:query])
+        (request_query.to_a & tour_query.to_a).any?
       end
 
       tours.select do |tour|

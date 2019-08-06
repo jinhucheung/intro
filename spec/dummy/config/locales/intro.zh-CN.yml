@@ -1,5 +1,10 @@
 zh-CN:
   intro:
+    tour:
+      exit: 不再提示
+      complete: 我知道了
+      next: 下一步
+      back: 上一步
     admin:
       title: 引导后台
       sign_in: 登录
@@ -80,11 +85,7 @@ zh-CN:
         fixed_placement: 开启后将不会自动调整位置
         remove_step: 移除此步骤
         delete_tour_confirm: 确认删除此引导？
-    tour:
-      exit: 不再提示
-      complete: 我知道了
-      next: 下一步
-      back: 上一步
     errors:
       sign_in: 用户名或密码错误
       unauthorized: 用户未登录
+      tour_not_found: 没有相关引导
