@@ -17,7 +17,7 @@ describe Intro::Admin::ToursController, type: :controller do
       expect(response).to redirect_to unauthenticated_path
 
       get :route, format: :json
-      expect(response).to redirect_to unauthenticated_path
+      expect(response).to have_http_status(:unauthorized)
 
       post :attempt
       expect(response).to redirect_to unauthenticated_path

@@ -141,9 +141,9 @@
 
     // test tour
     testBtn.addEventListener('click', function () {
-      if (testBtn.dataset.loading) return
+      if (testBtn.classList.contains('intro-loading')) return
 
-      testBtn.dataset.loading = true
+      testBtn.classList.add('intro-loading')
       tourBoost && tourBoost.hide()
 
       var data = new FormData(form)
@@ -153,7 +153,7 @@
       xhr.open('POST', "<%= attempt_admin_tours_path %>")
 
       xhr.onload = function () {
-        testBtn.removeAttribute('data-loading')
+        testBtn.classList.remove('intro-loading')
 
         if (xhr.status !== 200) return
 
@@ -169,7 +169,7 @@
       }
 
       xhr.onerror = function () {
-        testBtn.removeAttribute('data-loading')
+        testBtn.classList.remove('intro-loading')
       }
 
       xhr.send(data)

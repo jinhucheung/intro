@@ -4,6 +4,8 @@ Intro::Engine.routes.draw do
       delete :sign_out, on: :collection
     end
 
+    resources :images, only: [:create]
+
     resources :tours do
       member do
         put :publish

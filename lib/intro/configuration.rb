@@ -26,6 +26,9 @@ module Intro
     # the path for sign out an admin, default: '/intro/admin/sign_out'
     attr_accessor :sign_out_admin_path
 
+    # the storage of carrierwave, default: :file
+    attr_accessor :carrierwave_storage
+
     def initialize
       @enable = true
 
@@ -34,6 +37,8 @@ module Intro
       @current_user_method = 'current_user'
 
       @max_touch_count = 1
+
+      @carrierwave_storage = :file
     end
 
     def admin_username_digest

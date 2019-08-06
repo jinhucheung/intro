@@ -43,6 +43,7 @@
 
       template.innerHTML = "<%= escape_javascript render('step', index: 1) %>"
       template.querySelector('.intro-admin__step-remove').addEventListener('click', removeStep)
+      template.querySelector('.js-intro-admin__button-upload').addEventListener('click', selectImage)
       template.querySelector('.js-intro-step-index').innerText = curIndex
       template.querySelector('.js-intro-step-fixed-checkbox > input').setAttribute('id', 'intro-admin__step-fixed-' + curIndex)
       template.querySelector('.js-intro-step-fixed-checkbox > label').setAttribute('for', 'intro-admin__step-fixed-' + curIndex)
@@ -50,6 +51,79 @@
       content.appendChild(template.querySelector('.intro-admin__step'))
 
       template.remove()
+    })
+
+    // upload image
+    function selectImage (e) {
+      var btn = e.target
+      var imageInput = btn.imageInput
+
+      if (!imageInput) {
+        imageInput = document.createElement('input')
+        imageInput.setAttribute('type', 'file')
+        imageInput.setAttribute('accept', 'image/jpg, image/jpeg, image/png, image/gif, image/webp')
+        imageInput.addEventListener('change', function (e) {
+          uploadImage(btn, this.files[0])
+        })
+        btn.imageInput = imageInput
+      }
+
+      imageInput.click()
+    }
+
+    function uploadImage (btn, file) {
+      var step = btn.closest('.intro-admin__step')
+      var urlInput = step.querySelector('.js-intro-admin__image-url')
+      var widthInput = step.querySelector('.js-intro-admin__image-width')
+      var heightInput = step.querySelector('.js-intro-admin__image-height')
+
+      if (!file) {
+        urlInput.value = ''
+        widthInput.value = ''
+        heightInput.value = ''
+        return
+      }
+
+      if (btn.classList.contains('intro-loading')) return
+      btn.classList.add('intro-loading')
+
+      var data = new FormData()
+      data.append('image', file)
+
+      var xhr = new XMLHttpRequest()
+      xhr.open('POST', "<%= admin_images_path %>")
+
+      var csrfToken = document.querySelector('meta[name="csrf-token"]')
+      csrfToken && xhr.setRequestHeader('X-CSRF-Token', csrfToken.content)
+
+      xhr.onload = function () {
+        btn.classList.remove('intro-loading')
+
+        if (xhr.status !== 200) return
+
+        var res = JSON.parse(xhr.response)
+
+        if (res.data && res.data.url) {
+          urlInput.value = res.data.url
+
+          var image = document.createElement('img')
+          image.setAttribute('src', res.data.url)
+          image.onload = function () {
+            widthInput.value = this.width
+            heightInput.value = this.height
+          }
+        }
+      }
+
+      xhr.onerror = function () {
+        btn.classList.remove('intro-loading')
+      }
+
+      xhr.send(data)
+    }
+
+    document.querySelectorAll('.js-intro-admin__button-upload').forEach(function (element) {
+      element.addEventListener('click', selectImage)
     })
   })
 </script>

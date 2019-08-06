@@ -23,6 +23,7 @@ en:
       delete_confirm: Are you sure to delete it?
       submit: Submit
       test: Test
+      upload: Upload
       actions: Actions
       others: Others
       add_success: Added successfully
@@ -89,3 +90,4 @@ en:
       sign_in: Incorrect username or password
       unauthorized: It's unauthorized
       tour_not_found: This tour is not found
+      require_image: The image file is required

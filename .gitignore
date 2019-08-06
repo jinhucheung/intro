@@ -7,5 +7,6 @@ spec/dummy/log/
 spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/.byebug_history
+spec/dummy/public/uploads/
 Gemfile.lock
 .byebug_history

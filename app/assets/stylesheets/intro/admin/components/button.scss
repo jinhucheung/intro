@@ -6,8 +6,8 @@
   border: none;
   cursor: pointer;
   font-size: .85em;
-  background-color: buttonface;
-  color: buttontext;
+  background-color: #DDD;
+  color: #000;
 
   &:hover {
     opacity: .8;
@@ -24,5 +24,5 @@
 }
 
 .intro-admin__body a.intro-admin__button {
-  color: buttontext;
+  color: #000;
 }

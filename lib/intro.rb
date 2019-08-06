@@ -1,5 +1,6 @@
 require 'intro/engine'
 require 'intro/configuration'
+require 'carrierwave'
 require 'kaminari'
 require 'rails-ujs'
 require 'shepherdjs_rails'

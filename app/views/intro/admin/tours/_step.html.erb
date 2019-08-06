@@ -26,7 +26,12 @@
     <div class='two fields'>
       <div class='field'>
         <%= label_tag :component_image_url, t('intro.admin.component.image_url') %>
-        <%= text_field_tag "#{step_prefix}[image_url]", step['image_url'], placeholder: t('intro.admin.placeholders.image_url') %>
+        <div class='input-group'>
+          <%= text_field_tag "#{step_prefix}[image_url]", step['image_url'], placeholder: t('intro.admin.placeholders.image_url'), class: 'js-intro-admin__image-url' %>
+          <%= button_tag t('intro.admin.upload'), class: 'intro-admin__button js-intro-admin__button-upload', type: :button %>
+        </div>
+        <%= hidden_field_tag "#{step_prefix}[image_width]", step['image_width'], class: 'js-intro-admin__image-width' %>
+        <%= hidden_field_tag "#{step_prefix}[image_height]", step['image_height'], class: 'js-intro-admin__image-height' %>
       </div>
 
       <div class='field'>

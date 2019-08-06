@@ -202,3 +202,11 @@
 .intro-admin__form .intro-admin__hide {
   display: none;
 }
+
+.intro-admin__form .input-group {
+  @include flex;
+
+  > input {
+    flex: 1;
+  }
+}

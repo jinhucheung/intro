@@ -5,7 +5,13 @@ module Intro
       protected
 
       def authenticate
-        redirect_to unauthenticated_path unless authenticated?
+        return if authenticated?
+
+        respond_to do |format|
+          format.html { redirect_to unauthenticated_path }
+          format.json { render json: { message: t('intro.errors.unauthorized') }, status: :unauthorized }
+          format.any  { head :unauthorized }
+        end
       end
 
       def authenticated?

@@ -23,6 +23,7 @@ zh-CN:
       delete_confirm: 确定要删除此引导？
       submit: 提交
       test: 测试
+      upload: 上传
       actions: 操作
       others: 其他
       add_success: 添加成功
@@ -89,3 +90,4 @@ zh-CN:
       sign_in: 用户名或密码错误
       unauthorized: 用户未登录
       tour_not_found: 没有相关引导
+      require_image: 图片文件须提供
