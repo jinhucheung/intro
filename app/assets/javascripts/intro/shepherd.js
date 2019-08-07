@@ -67,12 +67,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (step.image_url) {
-      options.text = '<div class="shepherd-image-box" data-position="' + (step.image_placement || 'top') + '" data-has-title="' + !!step.title + '">' +
-                        '<div class="shepherd-image-box-source-container"><img height="' + step.image_height + 'px" width="' + step.image_width + 'px" src="' + encodeURI(step.image_url) + '"></div>' +
+      options.text = '<div class="shepherd-image-box" x-placement="' + (step.image_placement || 'top') + '">' +
+                        '<div class="shepherd-image-box-content"><img height="' + step.image_height + 'px" width="' + step.image_width + 'px" src="' + encodeURI(step.image_url) + '"></div>' +
                         (step.content ? ('<div class="shepherd-image-box-text">' + step.content + '</div>') : '') +
                      '</div>'
     } else if (step.content) {
-      options.text = '<div class="shepherd-text-source">' + step.content + '</div>'
+      options.text = '<div class="shepherd-text-box">' + step.content + '</div>'
     }
 
     if (step.element) {

@@ -50,15 +50,6 @@
   align-items: center;
 }
 
-@mixin flex-align-start {
-  -webkit-box-align: flex-start;
-  -webkit-align-items: flex-start;
-  -moz-box-align: flex-start;
-  -moz-align-items: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
 @mixin flex-pack-center {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
