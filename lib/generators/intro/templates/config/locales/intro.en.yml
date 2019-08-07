@@ -78,6 +78,7 @@ en:
         overlay_visible: Use modal overlay
         btn_complete_text: Enter the text of button
         btn_complete_link: Enter the link of button
+        cancel_link: Show a cancel icon in the header of the component
       tips:
         simple_route: Auto add controller, action, query and ident by simple route
         strict_route: Tour displays only when the page url is the same as simple route

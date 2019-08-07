@@ -1,5 +1,3 @@
 class HomeController < ApplicationController
-  def index
-    head :success
-  end
+  def index; end
 end

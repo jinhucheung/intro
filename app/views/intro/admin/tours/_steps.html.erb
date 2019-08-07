@@ -16,6 +16,11 @@
   document.addEventListener('DOMContentLoaded', function () {
     var steps = document.querySelector('.intro-admin__steps')
 
+    function refreshCheckbox (element, scope, index) {
+      element.querySelector('.js-intro-step-' + scope + '-checkbox > input').setAttribute('id', 'intro-admin__step-' + scope  + '-' + index)
+      element.querySelector('.js-intro-step-' + scope + '-checkbox > label').setAttribute('for', 'intro-admin__step-' + scope  + '-' + index)
+    }
+
     // remove step
     function removeStep (e) {
       e.target.closest('.intro-admin__step').remove()
@@ -25,8 +30,9 @@
         var curIndex = index + 1
 
         element.innerText = curIndex
-        step.querySelector('.js-intro-step-fixed-checkbox > input').setAttribute('id', 'intro-admin__step-fixed-' + curIndex)
-        step.querySelector('.js-intro-step-fixed-checkbox > label').setAttribute('for', 'intro-admin__step-fixed-' + curIndex)
+
+        refreshCheckbox(step, 'fixed', curIndex)
+        //refreshCheckbox(step, 'cancel-link', curIndex)
       })
     }
 
@@ -45,8 +51,9 @@
       template.querySelector('.intro-admin__step-remove').addEventListener('click', removeStep)
       template.querySelector('.js-intro-admin__button-upload').addEventListener('click', selectImage)
       template.querySelector('.js-intro-step-index').innerText = curIndex
-      template.querySelector('.js-intro-step-fixed-checkbox > input').setAttribute('id', 'intro-admin__step-fixed-' + curIndex)
-      template.querySelector('.js-intro-step-fixed-checkbox > label').setAttribute('for', 'intro-admin__step-fixed-' + curIndex)
+
+      refreshCheckbox(template, 'fixed', curIndex)
+      refreshCheckbox(template, 'cancel-link', curIndex)
 
       content.appendChild(template.querySelector('.intro-admin__step'))
 

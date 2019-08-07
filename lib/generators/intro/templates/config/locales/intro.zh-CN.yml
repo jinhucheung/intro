@@ -78,6 +78,7 @@ zh-CN:
         overlay_visible: 显示遮罩
         btn_complete_text: 输入按钮名称
         btn_complete_link: 输入按钮链接
+        cancel_link: 在组件顶部显示关闭图标
       tips:
         simple_route: 通过事例路由完善关联的 Controller、Action、标识等信息
         strict_route: 仅当引导页面与事例路由相同才出现引导

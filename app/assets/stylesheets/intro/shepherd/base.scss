@@ -1,0 +1,22 @@
+@import './variables';
+
+.intro-shepherd-modal-overlay-container {
+  z-index: $shepherd-model-overlay-zindex;
+}
+
+.intro-shepherd {
+  min-width: $shepherd-min-width;
+  -webkit-filter: $shepherd-drop-shadow;
+          filter: $shepherd-drop-shadow;
+}
+
+.intro-shepherd-has-title .intro-shepherd-content .intro-shepherd-header {
+  background: $shepherd-header-background;
+  box-shadow: 0 1px 0 0 $shepherd-header-border-color;
+  word-break: break-word;
+  padding: .9em 1em;
+}
+
+.intro-shepherd-cancel-link {
+  font-size: 1.2em;
+}

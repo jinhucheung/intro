@@ -64,14 +64,16 @@
         </div>
       </div>
 
-      <div class='field'>
+      <% btn_visible = @tour.new_record? || @tour.options['btn_visible'] %>
+
+      <div class='field' style="<%= 'margin-bottom: 1em;' unless btn_visible %>">
         <div class='checkbox intro-admin__checkbox'>
-          <%= check_box_tag 'tour[options][btn_visible]', 1, @tour.options['btn_visible'].nil? || @tour.options['btn_visible'].to_i > 0 %>
+          <%= check_box_tag 'tour[options][btn_visible]', 1, btn_visible, class: 'js-intro-btn-visible-input' %>
           <%= label_tag 'tour[options][btn_visible]', t('intro.admin.placeholders.btn_visible') %>
         </div>
       </div>
 
-      <div class='two fields'>
+      <div class='two fields js-intro-complete-btn-fields <%= 'intro-admin__hide' unless btn_visible %>'>
         <div class='field'>
           <%= label_tag :btn_complete_text, t('intro.admin.tour.btn_complete_text') %>
           <%= text_field_tag 'tour[options][btn_complete_text]', @tour.options['btn_complete_text'], placeholder: t('intro.admin.placeholders.btn_complete_text') %>
@@ -173,6 +175,19 @@
       }
 
       xhr.send(data)
+    })
+
+    // complete btn actions
+    document.querySelector('.js-intro-btn-visible-input').addEventListener('change', function (e) {
+      var completeBtnFields = document.querySelector('.js-intro-complete-btn-fields')
+
+      if (e.target.checked) {
+        completeBtnFields.classList.remove('intro-admin__hide')
+        e.target.closest('.field').style.marginBottom = null
+      } else {
+        completeBtnFields.classList.add('intro-admin__hide')
+        e.target.closest('.field').style.marginBottom = '1em'
+      }
     })
   })
 </script>

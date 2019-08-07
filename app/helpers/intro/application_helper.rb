@@ -4,8 +4,8 @@ module Intro
       Intro.config.sign_out_admin_path.presence || sign_out_admin_sessions_path
     end
 
-    def intro_tags(options = {})
-      return unless enable_intro?
+    def intro_tag(options = {})
+      return unless options[:enable] || enable_intro?
 
       intro_options = {
         controller: controller_path,
