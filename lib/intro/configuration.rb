@@ -29,6 +29,10 @@ module Intro
     # the storage of carrierwave, default: :file
     attr_accessor :carrierwave_storage
 
+    # cache tours status to reduce requests, default: false
+    # use `Rails.cache` to store tours status, change `config.cache_store` for different strategies
+    attr_accessor :cache
+
     def initialize
       @enable = true
 

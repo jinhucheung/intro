@@ -15,6 +15,7 @@ module Intro
 
     before_save :format_attributes
     before_save :update_route
+    after_commit :clear_cache if Intro.config.cache
 
     def expose_attributes
       as_json(only: %i[id ident controller_path action_name options]).with_indifferent_access
@@ -94,6 +95,12 @@ module Intro
 
       self.route[:strict] = %w[1 true].include?(self.route[:strict].to_s)
       self.route
+    end
+
+    def clear_cache
+      if destroyed? || (previous_changes.keys & %w[controller_path action_name published]).any?
+        Intro.cache.delete(controller_path, action_name)
+      end
     end
   end
 end

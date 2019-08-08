@@ -14,6 +14,8 @@ module Intro
       tours = Intro::Tour.with_controller_and_action(params[:controller_path], params[:action_name])
       tours = tours.published
 
+      Intro.cache.write(params[:controller_path], params[:action_name], tours.present?) if Intro.config.cache
+
       tours = filter_tours_by_route(tours)
       tours = filter_tours_by_histories(tours)
       tours = filter_tours_by_expired_time(tours)

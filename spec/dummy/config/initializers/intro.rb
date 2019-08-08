@@ -13,9 +13,6 @@ Intro.configure do
   self.admin_password = ENV['INTRO_APP_ADMIN_PASSWORD'] || "8ud1c_3vU5idynBN1gE8pUDnDVs"
 
   # admin_authenticate_account will override authenticate account process for background web, it should return boolean
-  #
-  # ==== Example
-  #
   # self.admin_authenticate_account = -> { current_user.try(:has_admin_role?) }
 
   # redirect to unauthenticated_admin_path if user is failed to authenticated, default: '/intro/admin/sessions/new'
@@ -26,4 +23,8 @@ Intro.configure do
 
   # the storage of carrierwave, default: :file
   # self.carrierwave_storage = :file
+
+  # cache tours status to reduce requests, default: false
+  # use `Rails.cache` to store tours status, change `config.cache_store` for different strategies
+  self.cache = true
 end

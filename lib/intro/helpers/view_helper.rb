@@ -22,7 +22,14 @@ module Intro
       end
 
       def enable_intro?
-        Intro.config.enable && request.get? && !request.xhr? && send(Intro.config.current_user_method)
+        return false unless Intro.config.enable
+
+        return false unless request.get? && !request.xhr? && send(Intro.config.current_user_method)
+
+        return true unless Intro.config.cache
+
+        exist_tours = Intro.cache.read(controller_path, action_name)
+        exist_tours || exist_tours.nil?
       end
     end
   end
