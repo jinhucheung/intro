@@ -14,10 +14,10 @@ module Intro
     # after user touches a tour more than max count, the tour doesn't display. default: 1
     attr_accessor :max_touch_count
 
-    # admin account for accessing background web
+    # admin account for accessing backstage
     attr_accessor :admin_username, :admin_password
 
-    # admin_authenticate_account will override authenticate_account process for background web, it should return boolean
+    # admin_authenticate_account will override authenticate_account process for backstage, it should return boolean
     attr_accessor :admin_authenticate_account
 
     # redirect to unauthenticated_admin_path if user is failed to authenticated, default: '/intro/admin/sessions/new'

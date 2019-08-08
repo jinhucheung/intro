@@ -10,7 +10,8 @@ module Intro
       end
 
       def index
-        @tours = Intro::Tour.recent.page(params[:page]).per(15)
+        @tours = Intro::Tour.page(params[:page]).per(15)
+        @tours = @tours.recent
       end
 
       def new
