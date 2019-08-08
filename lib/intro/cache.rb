@@ -16,7 +16,7 @@ module Intro
       private
 
       def cache_token(controller, action)
-        "intro-#{controller}-#{action}".freeze
+        "intro-#{controller}-#{action}"
       end
     end
   end

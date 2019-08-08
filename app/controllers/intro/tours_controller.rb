@@ -14,7 +14,7 @@ module Intro
       tours = Intro::Tour.with_controller_and_action(params[:controller_path], params[:action_name])
       tours = tours.published
 
-      Intro.cache.write(params[:controller_path], params[:action_name], tours.present?) if Intro.config.cache
+      Intro.cache.write(params[:controller_path], params[:action_name], tours.any?) if Intro.config.cache
 
       tours = filter_tours_by_route(tours)
       tours = filter_tours_by_histories(tours)
@@ -59,7 +59,7 @@ module Intro
 
         path_route[:source][:action] == tour.action_name &&
         path_route[:source][:controller] == tour.controller_path &&
-        (tour.route[:source].blank? || path_route[:source].except(:controller, :action).keys == tour.route[:source].except(:controller, :action).keys)
+        (tour.route[:source].blank? || path_route[:source].except(:controller, :action).keys.map(&:to_s) == tour.route[:source].except(:controller, :action).keys)
       end
 
       # filter tours by query string

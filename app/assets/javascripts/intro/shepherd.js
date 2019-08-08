@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (this.tour.options.btn_visible == 1) {
       if (index === 0) {
-        options.buttons = [{ text: locale.exit, action: this.shepherd.cancel, classes: 'shepherd-button-secondary' }]
+        options.buttons = [{ text: locale.exit, action: this.shepherd.cancel, secondary: true }]
         if (steps.length === 1) {
           options.buttons.push({ text: locale.complete, action: this.shepherd.complete })
         } else {
@@ -118,12 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       } else if (index === steps.length - 1) {
         options.buttons = [
-          { text: locale.back, action: this.shepherd.back, classes: 'shepherd-button-secondary' },
+          { text: locale.back, action: this.shepherd.back, secondary: true },
           { text: locale.complete, action: this.shepherd.complete }
         ]
       } else {
         options.buttons = [
-          { text: locale.back, action: this.shepherd.back, classes: 'shepherd-button-secondary' },
+          { text: locale.back, action: this.shepherd.back, secondary: true },
           { text: locale.next, action: this.next.bind(this) }
         ]
       }

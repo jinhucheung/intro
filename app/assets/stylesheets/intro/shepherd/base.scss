@@ -7,6 +7,10 @@
           filter: $shepherd-drop-shadow;
 }
 
+.intro-shepherd .tippy-content {
+  font-size: $shepherd-root-font-size;
+}
+
 // modal overlay
 
 .intro-shepherd-modal-overlay-container {
@@ -31,24 +35,25 @@
 
 // header
 
-.intro-shepherd-has-title .intro-shepherd-content .intro-shepherd-header {
+.intro-shepherd.intro-shepherd-has-title  .intro-shepherd-content .intro-shepherd-header {
   background: $shepherd-header-background;
   box-shadow: 0 1px 0 0 $shepherd-header-border-color;
   word-break: break-word;
   padding: $shepherd-content-padding;
 }
 
-.intro-shepherd-cancel-link {
+.intro-shepherd .intro-shepherd-cancel-link {
+  outline: none;
   font-size: $shepherd-cancel-link-font-size;
 }
 
-.intro-shepherd-title {
+.intro-shepherd .intro-shepherd-title {
   font-size: $shepherd-title-font-size;
 }
 
 // content
 
-.intro-shepherd-text {
+.intro-shepherd .intro-shepherd-text {
   text-align: left;
   word-break: break-word;
   padding: $shepherd-content-padding;
@@ -129,20 +134,26 @@
 
 // footer
 
-.intro-shepherd-footer .intro-shepherd-button {
+.intro-shepherd .intro-shepherd-footer .intro-shepherd-button {
   background: $shepherd-button-background;
   color: $shepherd-button-text-color;
   font-size: $shepherd-button-font-size;
+  transition: none;
 
   &:focus {
     outline: none;
   }
   &:hover {
     opacity: .6;
+    background: $shepherd-button-background;
   }
 }
 
-.intro-shepherd-footer .intro-shepherd-button.shepherd-button-secondary {
+.intro-shepherd .intro-shepherd-footer .intro-shepherd-button.intro-shepherd-button-secondary {
   background: $shepherd-secondary-button-background;
   color: $shepherd-secondary-button-text-color;
+
+  &:hover {
+    background: $shepherd-secondary-button-background;
+  }
 }
