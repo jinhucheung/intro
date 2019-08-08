@@ -110,7 +110,7 @@
     var queryInput = document.querySelector('.js-tour-query-input')
     var testBtn = document.querySelector('.js-intro-admin__button-test')
     var form = document.querySelector('.intro-admin__tour-form')
-    var tourBoost
+    var introTour
 
     // auto fill ident, controller, action, query input
     simpleRouteInput.addEventListener('change', function (e) {
@@ -146,7 +146,7 @@
       if (testBtn.classList.contains('intro-loading')) return
 
       testBtn.classList.add('intro-loading')
-      tourBoost && tourBoost.hide()
+      introTour && introTour.hide()
 
       var data = new FormData(form)
       data.append('_method', 'POST')
@@ -162,9 +162,9 @@
         var res = JSON.parse(xhr.response)
 
         if (res.data) {
-          tourBoost = new window.IntroTourBoost(res.data)
+          introTour = new window._intro.Tour(res.data)
 
-          tourBoost.test({
+          introTour.test({
             element: '.js-intro-admin__button-test'
           })
         }

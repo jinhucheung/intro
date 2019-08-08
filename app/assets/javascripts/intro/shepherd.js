@@ -1,14 +1,14 @@
 //= require shepherd.min
 
 document.addEventListener('DOMContentLoaded', function () {
-  var introMeta = document.querySelector('meta[name="_intro"]')
+  var intro = window._intro
 
-  if (!introMeta) return
+  if (!intro) return
 
-  var locale = JSON.parse(introMeta.dataset.locale)
-  var shepherdOptions = JSON.parse(introMeta.dataset.shepherdOptions)
+  var locale = intro.locale
+  var shepherdOptions = intro.shepherd_options
 
-  function TourBoost(tour) {
+  function Tour(tour) {
     this.tour = tour
     this.shepherd = new Shepherd.Tour(extend({
       classPrefix: 'intro',
@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }, shepherdOptions))
   }
 
-  TourBoost.prototype.setup = function () {
+  Tour.prototype.setup = function () {
     this.configure()
     this.start()
   }
 
-  TourBoost.prototype.test = function (options) {
+  Tour.prototype.test = function (options) {
     this.tour.options.steps.forEach(function (step) {
       if (step.element && !document.querySelector(step.element)) {
         step.element = options.element
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     this.start()
   }
 
-  TourBoost.prototype.configure = function () {
+  Tour.prototype.configure = function () {
     locale.complete = this.tour.options.btn_complete_text || locale.complete
 
     this.configureSteps(this.tour.options.steps)
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     this.shepherd.on('show', this.show.bind(this))
   }
 
-  TourBoost.prototype.configureSteps = function (steps) {
+  Tour.prototype.configureSteps = function (steps) {
     var self = this
 
     steps.forEach(function (step, index) {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  TourBoost.prototype.configureStepBase = function (step, index) {
+  Tour.prototype.configureStepBase = function (step, index) {
     var options = {}
     var popperOptions = {}
 
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return options
   }
 
-  TourBoost.prototype.configureStepButtons = function (step, index, steps) {
+  Tour.prototype.configureStepButtons = function (step, index, steps) {
     var options = {}
 
     if (this.tour.options.btn_visible == 1) {
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return options
   }
 
-  TourBoost.prototype.start = function () {
+  Tour.prototype.start = function () {
     var firstStep = this.shepherd.steps[0]
 
     if (firstStep && (!firstStep.options.attachTo || firstStep.options.showOn())) {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  TourBoost.prototype.next = function () {
+  Tour.prototype.next = function () {
     var shepherd = this.shepherd
     var nextStep = shepherd.steps[shepherd.steps.indexOf(shepherd.getCurrentStep()) + 1]
 
@@ -155,11 +155,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  TourBoost.prototype.hide = function () {
+  Tour.prototype.hide = function () {
     this.shepherd.hide()
   }
 
-  TourBoost.prototype.show = function (e) {
+  Tour.prototype.show = function (e) {
     var self = this
 
     setTimeout(function () {
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 0)
   }
 
-  TourBoost.prototype.complete = function () {
+  Tour.prototype.complete = function () {
     this.record('complete')
 
     if (this.tour.options.btn_complete_link) {
@@ -191,42 +191,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  TourBoost.prototype.cancel = function () {
+  Tour.prototype.cancel = function () {
     this.record('cancel')
   }
 
-  TourBoost.prototype.record = function (action) {
-    var self = this
+  Tour.prototype.record = function (action) {
+    if (!this.tour.id) return
 
-    if (!self.tour.id) return
+    createCookie('intro-tour-' + this.tour.id, (action || 'complete'), 7300)
 
     var xhr = new XMLHttpRequest()
     var csrfToken = document.querySelector('meta[name="csrf-token"]')
 
-    xhr.open('POST', introMeta.dataset.recordToursPath)
+    xhr.open('POST', intro.record_tours_path)
     csrfToken && xhr.setRequestHeader('X-CSRF-Token', csrfToken.content)
     xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.onload = function () {
-      if (xhr.status !== 200) return
-
-      createCookie('intro-tour-' + self.tour.id, (action || 'complete'), 7300)
-    }
     xhr.send(JSON.stringify({
-      id: self.tour.id
+      id: this.tour.id
     }))
   }
 
-  window.IntroTourBoost = TourBoost
+  intro.Tour = Tour
 
   function loadTours () {
     var xhr = new XMLHttpRequest()
 
     xhr.open(
       'GET',
-      introMeta.dataset.toursPath +
-      '?controller_path=' + encodeURIComponent(introMeta.dataset.controller) +
-      '&action_name=' + encodeURIComponent(introMeta.dataset.action) +
-      '&original_url=' + encodeURIComponent(introMeta.dataset.originalUrl)
+      intro.tours_path +
+      '?controller_path=' + encodeURIComponent(intro.controller) +
+      '&action_name=' + encodeURIComponent(intro.action) +
+      '&original_url=' + encodeURIComponent(intro.original_url)
     )
     xhr.onload = function () {
       if (xhr.status !== 200) return
@@ -236,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (res.data) {
         res.data.forEach(function (tour) {
           if (tour && tour.options && !getCookie('intro-tour-' + tour.id)) {
-            new TourBoost(tour).setup()
+            new Tour(tour).setup()
           }
         })
       }

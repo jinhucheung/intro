@@ -139,6 +139,7 @@
   color: $shepherd-button-text-color;
   font-size: $shepherd-button-font-size;
   transition: none;
+  text-transform: none;
 
   &:focus {
     outline: none;

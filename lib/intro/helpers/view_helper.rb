@@ -15,7 +15,7 @@ module Intro
         }.freeze
 
         <<-HTML.html_safe
-          #{tag(:meta, name: '_intro', data: intro_options)}
+          <script>window._intro = #{ intro_options.to_json }</script>
           #{javascript_include_tag('intro/application')}
           #{stylesheet_link_tag('intro/application')}
         HTML
