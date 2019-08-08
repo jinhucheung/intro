@@ -59,7 +59,7 @@ module Intro
 
         path_route[:source][:action] == tour.action_name &&
         path_route[:source][:controller] == tour.controller_path &&
-        (tour.route[:source].blank? || path_route[:source].except(:controller, :action).keys.map(&:to_s) == tour.route[:source].except(:controller, :action).keys)
+        (tour.route[:source].blank? || path_route[:source].except(:controller, :action).keys.map(&:to_s) == tour.route[:source].except(:controller, :action).keys.map(&:to_s))
       end
 
       # filter tours by query string

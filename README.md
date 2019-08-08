@@ -1,5 +1,8 @@
 # Intro
 
+[![Gem Version](https://badge.fury.io/rb/intro.svg)](https://badge.fury.io/rb/intro)
+[![Build Status](https://travis-ci.org/jinhucheung/intro.svg?branch=master)](https://travis-ci.org/jinhucheung/intro)
+
 Intro brings your rails application to new feature introduction and step-by-step users guide.
 
 Intro injects dynamically-generated [Shepherd.js](https://github.com/shipshapecode/shepherd) code into  your application whenever user should see a guided tour.
