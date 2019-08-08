@@ -1,8 +1,7 @@
-require 'sprockets'
 require 'shepherdjs_rails'
 require 'carrierwave'
 require 'kaminari'
-require 'rails-ujs'
+require 'jquery-rails'
 
 require 'intro/engine'
 require 'intro/cache'
