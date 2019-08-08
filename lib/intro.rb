@@ -1,3 +1,4 @@
+require 'sprockets'
 require 'shepherdjs_rails'
 require 'carrierwave'
 require 'kaminari'

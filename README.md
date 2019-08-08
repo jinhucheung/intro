@@ -58,9 +58,9 @@ Insert `intro` into common layout, just before the closing body tag:
 
 ## Thanks
 
-1. [shepherd](https://github.com/shipshapecode/shepherd)
++ [shepherd](https://github.com/shipshapecode/shepherd)
 
-2. [abraham](https://github.com/actmd/abraham)
++ [abraham](https://github.com/actmd/abraham)
 
 ## Contributing
 
