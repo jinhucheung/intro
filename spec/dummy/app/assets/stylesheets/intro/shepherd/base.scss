@@ -39,7 +39,11 @@
 }
 
 .intro-shepherd-cancel-link {
-  font-size: 1.2em;
+  font-size: $shepherd-cancel-link-font-size;
+}
+
+.intro-shepherd-title {
+  font-size: $shepherd-title-font-size;
 }
 
 // content
@@ -48,6 +52,7 @@
   text-align: left;
   word-break: break-word;
   padding: $shepherd-content-padding;
+  font-size: $shepherd-content-font-size;
 }
 
 .intro-shepherd .shepherd-image-box[x-placement='top'] {

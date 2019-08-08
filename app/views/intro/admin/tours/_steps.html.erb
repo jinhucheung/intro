@@ -32,7 +32,7 @@
         element.innerText = curIndex
 
         refreshCheckbox(step, 'fixed', curIndex)
-        //refreshCheckbox(step, 'cancel-link', curIndex)
+        refreshCheckbox(step, 'cancel-link', curIndex)
       })
     }
 
@@ -50,6 +50,7 @@
       template.innerHTML = "<%= escape_javascript render('step', index: 1) %>"
       template.querySelector('.intro-admin__step-remove').addEventListener('click', removeStep)
       template.querySelector('.js-intro-admin__button-upload').addEventListener('click', selectImage)
+      template.querySelector('.js-intro-admin__image-url').addEventListener('change', changeImageSize)
       template.querySelector('.js-intro-step-index').innerText = curIndex
 
       refreshCheckbox(template, 'fixed', curIndex)
@@ -81,13 +82,10 @@
     function uploadImage (btn, file) {
       var step = btn.closest('.intro-admin__step')
       var urlInput = step.querySelector('.js-intro-admin__image-url')
-      var widthInput = step.querySelector('.js-intro-admin__image-width')
-      var heightInput = step.querySelector('.js-intro-admin__image-height')
 
       if (!file) {
         urlInput.value = ''
-        widthInput.value = ''
-        heightInput.value = ''
+        updateImageSize(step, urlInput.value)
         return
       }
 
@@ -112,14 +110,10 @@
 
         if (res.data && res.data.url) {
           urlInput.value = res.data.url
-
-          var image = document.createElement('img')
-          image.setAttribute('src', res.data.url)
-          image.onload = function () {
-            widthInput.value = this.width
-            heightInput.value = this.height
-          }
+        } else {
+          urlInput.value = ''
         }
+        updateImageSize(step, urlInput.value)
       }
 
       xhr.onerror = function () {
@@ -128,6 +122,33 @@
 
       xhr.send(data)
     }
+
+    function changeImageSize (e) {
+      var step = e.target.closest('.intro-admin__step')
+      updateImageSize(step, e.target.value)
+    }
+
+    function updateImageSize (step, imageUrl) {
+      var widthInput = step.querySelector('.js-intro-admin__image-width')
+      var heightInput = step.querySelector('.js-intro-admin__image-height')
+
+      widthInput.value = ''
+      heightInput.value = ''
+
+      if (imageUrl) {
+        var image = document.createElement('img')
+
+        image.setAttribute('src', imageUrl)
+        image.onload = function () {
+          widthInput.value = this.width
+          heightInput.value = this.height
+        }
+      }
+    }
+
+    document.querySelectorAll('.js-intro-admin__image-url').forEach(function (element) {
+      element.addEventListener('change', changeImageSize)
+    })
 
     document.querySelectorAll('.js-intro-admin__button-upload').forEach(function (element) {
       element.addEventListener('click', selectImage)
