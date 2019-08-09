@@ -1,7 +1,7 @@
 module Intro
   module Helpers
     module ViewHelper
-      def intro_tag(options = {})
+      def intro_tags(options = {})
         return unless options[:enable] || enable_intro?
 
         intro_options = {

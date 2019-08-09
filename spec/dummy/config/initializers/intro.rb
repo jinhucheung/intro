@@ -1,4 +1,7 @@
 Intro.configure do
+  # switch intro status. all tours don't display if intro is disable. default: true
+  # self.enable = true
+
   # class name of your User Modal, default: 'User'
   # self.user_class = 'User'
 
@@ -12,7 +15,7 @@ Intro.configure do
   self.admin_username = ENV['INTRO_APP_ADMIN_USERNAME'] || "WRDkzl4"
   self.admin_password = ENV['INTRO_APP_ADMIN_PASSWORD'] || "8ud1c_3vU5idynBN1gE8pUDnDVs"
 
-  # admin_authenticate_account will override authenticate account process for backstage, it should return boolean
+  # admin_authenticate_account will override authenticate_acount process for backstage, it should return boolean
   # self.admin_authenticate_account = -> { current_user.try(:has_admin_role?) }
 
   # redirect to unauthenticated_admin_path if user is failed to authenticated, default: '/intro/admin/sessions/new'
@@ -25,6 +28,6 @@ Intro.configure do
   # self.carrierwave_storage = :file
 
   # cache tours status to reduce requests, default: false
-  # use `Rails.cache` to store tours status, change `config.cache_store` for different strategies
+  # use `Rails.cache` to store tours status, change `config.cache_store` for different strategies in environment
   self.cache = true
 end
