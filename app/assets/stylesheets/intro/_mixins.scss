@@ -9,12 +9,6 @@
   }
 }
 
-@mixin a-link-color($color) {
-  a {
-    @include link-color($color);
-  }
-}
-
 @mixin flex {
   display: -webkit-box;
   display: -webkit-flex;
