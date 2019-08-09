@@ -87,7 +87,7 @@ describe Intro::Admin::ToursController, type: :controller do
     end
 
     context '#create' do
-      it 'should create tour with ident successfully' do
+      it 'should successfully create tour with ident' do
         expect { post :create, tour: { ident: random_string } }.to change { Intro::Tour.count }.by(1)
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to admin_tour_path(assigns(:tour))
@@ -183,28 +183,28 @@ describe Intro::Admin::ToursController, type: :controller do
           expect(response).to render_template(:edit)
         end
 
-        it 'should update tour with valid ident successfully' do
+        it 'should successfully update tour with valid ident' do
           new_ident = "new-#{tour.ident}"
           put :update, id: tour.id, tour: { ident: new_ident }
           expect(assigns(:tour).previous_changes).to have_key('ident')
           expect(assigns(:tour).ident).to eq new_ident
         end
 
-        it 'should update tour with valid controller successfully' do
+        it 'should successfully update tour with valid controller' do
           new_controller = "new-#{tour.controller_path}"
           put :update, id: tour.id, tour: { controller_path: new_controller }
           expect(assigns(:tour).previous_changes).to have_key('controller_path')
           expect(assigns(:tour).controller_path).to eq new_controller
         end
 
-        it 'should update tour with valid action successfully' do
+        it 'should successfully update tour with valid action' do
           new_action = "new-#{tour.action_name}"
           put :update, id: tour.id, tour: { action_name: new_action }
           expect(assigns(:tour).previous_changes).to have_key('action_name')
           expect(assigns(:tour).action_name).to eq new_action
         end
 
-        it 'should update tour with valid options successfully' do
+        it 'should successfully update tour with valid options' do
           options = { title: 'title' }
           put :update, id: tour.id, tour: { options: options }
           expect(assigns(:tour).previous_changes).to have_key('options')
@@ -212,7 +212,7 @@ describe Intro::Admin::ToursController, type: :controller do
           expect(assigns(:tour).options['title']).to eq 'title'
         end
 
-        it 'should update tour with valid route successfully' do
+        it 'should successfully update tour with valid route' do
           route = { simple: '/' }
           put :update, id: tour.id, tour: { route: route }
           expect(assigns(:tour).previous_changes).to have_key('route')
@@ -220,7 +220,7 @@ describe Intro::Admin::ToursController, type: :controller do
           expect(assigns(:tour).route['simple']).to eq '/'
         end
 
-        it 'should update tour with valid expired time successfully' do
+        it 'should successfully update tour with valid expired time' do
           new_expired_at = 1.day.since.strftime('%F')
           put :update, id: tour.id, tour: { expired_at: new_expired_at }
           expect(assigns(:tour).previous_changes).to have_key('expired_at')
@@ -229,7 +229,7 @@ describe Intro::Admin::ToursController, type: :controller do
       end
 
       context '#destroy' do
-        it 'should destroy tour successfully' do
+        it 'should successfully destroy tour' do
           delete :destroy, id: tour.id
           expect(assigns(:tour).destroyed?).to be true
           expect(response).to redirect_to admin_tours_path

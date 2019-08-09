@@ -27,7 +27,7 @@ describe Intro::Admin::ImagesController, type: :controller do
         expect(response).to have_http_status(:bad_request)
       end
 
-      it 'should upload with image successfully' do
+      it 'should successfully upload with image' do
         self.class.fixture_path = File.expand_path('../../fixtures', __FILE__)  if self.class.respond_to?(:fixture_path) && !self.class.fixture_path
 
         post :create, image: image, format: :json
