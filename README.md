@@ -19,6 +19,8 @@ Intro injects dynamically-generated [Shepherd.js](https://github.com/shipshapeco
 
 ## Demo
 
+[Demo](https://intro-demo.herokuapp.com/)
+
 ## Installation
 
 Add `intro` to application's Gemfile:
