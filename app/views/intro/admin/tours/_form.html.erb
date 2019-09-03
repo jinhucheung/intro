@@ -102,91 +102,86 @@
 <% end %>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var simpleRouteInput = document.querySelector('.js-tour-simple-route-input')
-    var identInput = document.querySelector('.js-tour-ident-input')
-    var controllerInput = document.querySelector('.js-tour-controller-input')
-    var actionInput = document.querySelector('.js-tour-action-input')
-    var queryInput = document.querySelector('.js-tour-query-input')
-    var testBtn = document.querySelector('.js-intro-admin__button-test')
-    var form = document.querySelector('.intro-admin__tour-form')
+  $(function () {
     var introTour
 
     // auto fill ident, controller, action, query input
-    simpleRouteInput.addEventListener('change', function (e) {
+    $('.js-tour-simple-route-input').change(function (e) {
       if (!e.target.value) return
 
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', "<%= route_admin_tours_path %>?path=" + encodeURIComponent(e.target.value))
-      xhr.setRequestHeader('Content-Type', 'application/json')
-      xhr.onload = function () {
-        if (xhr.status !== 200) return
+      var $identInput = $('.js-tour-ident-input')
+      var $controllerInput = $('.js-tour-controller-input')
+      var $actionInput = $('.js-tour-action-input')
+      var $queryInput = $('.js-tour-query-input')
 
-        var res = JSON.parse(xhr.response)
-        var data = res.data
+      $.ajax({
+        method: 'GET',
+        url: "<%= route_admin_tours_path %>?path=" + encodeURIComponent(e.target.value),
+        contentType: 'application/json',
+        success: function (res) {
+          var data = res && res.data
+          if (!data) return
 
-        if (!data) return
-        if (data.source) {
-          controllerInput.value = data.source.controller
-          actionInput.value = data.source.action
+          if (data.source) {
+            $controllerInput.val(data.source.controller)
+            $actionInput.val(data.source.action)
 
-          if (/^(([\/\w]+)#(\w+)-.*)|(\s*)$/.test(identInput.value)) {
-            identInput.value = data.source.controller + '#' + data.source.action + '-' + Math.random().toString(36).slice(-6)
+            if (/^(([\/\w]+)#(\w+)-.*)|(\s*)$/.test($identInput.val())) {
+              $identInput.val(data.source.controller + '#' + data.source.action + '-' + Math.random().toString(36).slice(-6))
+            }
+          }
+
+          if (data.query) {
+            $queryInput.val(data.query)
           }
         }
-        if (data.query) {
-          queryInput.value = data.query
-        }
-      }
-      xhr.send()
+      })
     })
 
     // test tour
-    testBtn.addEventListener('click', function () {
-      if (testBtn.classList.contains('intro-loading')) return
+    $('.js-intro-admin__button-test').click(function () {
+      var $this = $(this)
+      var $form = $('.intro-admin__tour-form')
 
-      testBtn.classList.add('intro-loading')
-      introTour && introTour.hide()
+      if ($this.hasClass('intro-loading')) return
 
-      var data = new FormData(form)
-      data.append('_method', 'POST')
+      $.ajax({
+        method: 'POST',
+        url: "<%= attempt_admin_tours_path %>",
+        data: $form.serialize().replace(/&_method=put&/i, '&_method=post&'),
+        beforeSend: function () {
+          $this.addClass('intro-loading')
+          introTour && introTour.hide()
+        },
+        success: function (res) {
+          if (res.data) {
+            introTour = new window._intro.Tour(res.data)
 
-      var xhr = new XMLHttpRequest()
-      xhr.open('POST', "<%= attempt_admin_tours_path %>")
+            introTour.test({
+              element: '.js-intro-admin__button-test'
+            })
+          }
 
-      xhr.onload = function () {
-        testBtn.classList.remove('intro-loading')
-
-        if (xhr.status !== 200) return
-
-        var res = JSON.parse(xhr.response)
-
-        if (res.data) {
-          introTour = new window._intro.Tour(res.data)
-
-          introTour.test({
-            element: '.js-intro-admin__button-test'
-          })
+          $this.removeClass('intro-loading')
+        },
+        error: function () {
+          $this.removeClass('intro-loading')
         }
-      }
+      })
 
-      xhr.onerror = function () {
-        testBtn.classList.remove('intro-loading')
-      }
-
-      xhr.send(data)
     })
 
     // complete btn actions
-    document.querySelector('.js-intro-btn-visible-input').addEventListener('change', function (e) {
-      var completeBtnFields = document.querySelector('.js-intro-complete-btn-fields')
+    $('.js-intro-btn-visible-input').change(function (e) {
+      var $field = $(this).closest('.field')
+      var $completeBtnFields = $('.js-intro-complete-btn-fields')
 
       if (e.target.checked) {
-        completeBtnFields.classList.remove('intro-admin__hide')
-        e.target.closest('.field').style.marginBottom = null
+        $completeBtnFields.removeClass('intro-admin__hide')
+        $field.css('marginBottom', 'null')
       } else {
-        completeBtnFields.classList.add('intro-admin__hide')
-        e.target.closest('.field').style.marginBottom = '1em'
+        $completeBtnFields.addClass('intro-admin__hide')
+        $field.css('marginBottom', '1em')
       }
     })
   })

@@ -13,145 +13,112 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var steps = document.querySelector('.intro-admin__steps')
+  $(function () {
+    var $steps = $('.intro-admin__steps')
 
-    function refreshCheckbox (element, scope, index) {
-      element.querySelector('.js-intro-step-' + scope + '-checkbox > input').setAttribute('id', 'intro-admin__step-' + scope  + '-' + index)
-      element.querySelector('.js-intro-step-' + scope + '-checkbox > label').setAttribute('for', 'intro-admin__step-' + scope  + '-' + index)
-    }
+    function refreshStepIndexes () {
+      $('.intro-admin__step').each(function (index, step) {
+        var $step = $(step)
 
-    // remove step
-    function removeStep (e) {
-      e.target.closest('.intro-admin__step').remove()
+        $step.find('.js-intro-step-index').text(index + 1)
+        $step.find('.checkbox').each(function (_, checkbox) {
+          var $checkbox = $(checkbox)
+          var scope = $checkbox.data('scope')
 
-      steps.querySelectorAll('.js-intro-step-index').forEach(function (element, index) {
-        var step = element.closest('.intro-admin__step')
-        var curIndex = index + 1
-
-        element.innerText = curIndex
-
-        refreshCheckbox(step, 'fixed', curIndex)
-        refreshCheckbox(step, 'cancel-link', curIndex)
+          $checkbox.find('> input').attr('id', 'intro-admin__step-' + scope + '-' + index)
+          $checkbox.find('> label').attr('for', 'intro-admin__step-' + scope + '-' + index)
+        })
       })
     }
 
-    steps.querySelectorAll('.intro-admin__step-remove').forEach(function (element) {
-      element.addEventListener('click', removeStep)
+    // remove step
+    $steps.on('click', '.intro-admin__step-remove', function () {
+      var $this = $(this)
+      $this.closest('.intro-admin__step').remove()
+
+      refreshStepIndexes()
     })
 
     // add step
-    steps.querySelector('.add-step-button').addEventListener('click', function () {
-      var template = document.createElement('div')
-      var content  = steps.querySelector('.content')
-      var lastStep = steps.querySelector('.intro-admin__step:last-child .js-intro-step-index')
-      var curIndex = parseInt(lastStep.innerText) + 1
+    $steps.on('click', '.add-step-button', function () {
+      $steps.find('.content').append("<%= escape_javascript render('step', index: 1) %>")
 
-      template.innerHTML = "<%= escape_javascript render('step', index: 1) %>"
-      template.querySelector('.intro-admin__step-remove').addEventListener('click', removeStep)
-      template.querySelector('.js-intro-admin__button-upload').addEventListener('click', selectImage)
-      template.querySelector('.js-intro-admin__image-url').addEventListener('change', changeImageSize)
-      template.querySelector('.js-intro-step-index').innerText = curIndex
-
-      refreshCheckbox(template, 'fixed', curIndex)
-      refreshCheckbox(template, 'cancel-link', curIndex)
-
-      content.appendChild(template.querySelector('.intro-admin__step'))
-
-      template.remove()
+      refreshStepIndexes()
     })
 
     // upload image
-    function selectImage (e) {
-      var btn = e.target
-      var imageInput = btn.imageInput
-
-      if (!imageInput) {
-        imageInput = document.createElement('input')
-        imageInput.setAttribute('type', 'file')
-        imageInput.setAttribute('accept', 'image/jpg, image/jpeg, image/png, image/gif, image/webp')
-        imageInput.addEventListener('change', function (e) {
-          uploadImage(btn, this.files[0])
-        })
-        btn.imageInput = imageInput
-      }
-
-      imageInput.click()
-    }
-
-    function uploadImage (btn, file) {
-      var step = btn.closest('.intro-admin__step')
-      var urlInput = step.querySelector('.js-intro-admin__image-url')
+    function uploadImage (uploadBtn, file) {
+      var $uploadBtn = $(uploadBtn)
+      var $step = $uploadBtn.closest('.intro-admin__step')
+      var $imageUrlInput = $step.find('.js-intro-admin__image-url')
+      var formData
 
       if (!file) {
-        urlInput.value = ''
-        updateImageSize(step, urlInput.value)
+        $imageUrlInput.val('')
+        $imageUrlInput.trigger('change')
         return
       }
 
-      if (btn.classList.contains('intro-loading')) return
-      btn.classList.add('intro-loading')
+      if ($uploadBtn.hasClass('intro-loading')) return
 
-      var data = new FormData()
-      data.append('image', file)
+      formData = new FormData()
+      formData.append('image', file)
 
-      var xhr = new XMLHttpRequest()
-      xhr.open('POST', "<%= admin_images_path %>")
-
-      var csrfToken = document.querySelector('meta[name="csrf-token"]')
-      csrfToken && xhr.setRequestHeader('X-CSRF-Token', csrfToken.content)
-
-      xhr.onload = function () {
-        btn.classList.remove('intro-loading')
-
-        if (xhr.status !== 200) return
-
-        var res = JSON.parse(xhr.response)
-
-        if (res.data && res.data.url) {
-          urlInput.value = res.data.url
-        } else {
-          urlInput.value = ''
+      $.ajax({
+        method: 'POST',
+        url: "<%= admin_images_path %>",
+        data: formData,
+        contentType: false,
+        processData: false,
+        cache: false,
+        beforeSend: function () {
+          $uploadBtn.addClass('intro-loading')
+        },
+        success: function (res) {
+          if (res.data && res.data.url) {
+            $imageUrlInput.val(res.data.url)
+          } else {
+            $imageUrlInput.val('')
+          }
+          $imageUrlInput.trigger('change')
+          $uploadBtn.removeClass('intro-loading')
+        },
+        error: function () {
+          $uploadBtn.removeClass('intro-loading')
         }
-        updateImageSize(step, urlInput.value)
-      }
-
-      xhr.onerror = function () {
-        btn.classList.remove('intro-loading')
-      }
-
-      xhr.send(data)
+      })
     }
 
-    function changeImageSize (e) {
-      var step = e.target.closest('.intro-admin__step')
-      updateImageSize(step, e.target.value)
-    }
+    $steps.on('click', '.js-intro-admin__button-upload', function () {
+      var $this = $(this)
+      var $imageInput = $this.data('imageInput')
 
-    function updateImageSize (step, imageUrl) {
-      var widthInput = step.querySelector('.js-intro-admin__image-width')
-      var heightInput = step.querySelector('.js-intro-admin__image-height')
-
-      widthInput.value = ''
-      heightInput.value = ''
-
-      if (imageUrl) {
-        var image = document.createElement('img')
-
-        image.setAttribute('src', imageUrl)
-        image.onload = function () {
-          widthInput.value = this.width
-          heightInput.value = this.height
-        }
+      if (!$imageInput) {
+        $imageInput = $('<input type="file" accept="image/jpg, image/jpeg, image/png, image/gif, image/webp">')
+        $imageInput.change(function () {
+          uploadImage($this, this.files[0])
+        })
+        $this.data('imageInput', $imageInput)
       }
-    }
 
-    document.querySelectorAll('.js-intro-admin__image-url').forEach(function (element) {
-      element.addEventListener('change', changeImageSize)
+      $imageInput.trigger('click')
     })
 
-    document.querySelectorAll('.js-intro-admin__button-upload').forEach(function (element) {
-      element.addEventListener('click', selectImage)
+    $steps.on('change', '.js-intro-admin__image-url', function () {
+      var $this = $(this)
+      var $step = $this.closest('.intro-admin__step')
+      var $widthInput = $step.find('.js-intro-admin__image-width')
+      var $heightInput = $step.find('.js-intro-admin__image-height')
+
+      if ($this.val()) {
+        $('<img />').attr('src', $this.val()).load(function () {
+          $widthInput.val(this.width)
+          $heightInput.val(this.height)
+        })
+      } else {
+        $widthInput.val('')
+        $heightInput.val('')
+      }
     })
   })
 </script>
