@@ -25,6 +25,33 @@
   margin-bottom: 1em;
 }
 
+.intro-admin__tour-form .local-field {
+  .header {
+    @include flex;
+    @include flex-pack-justify;
+
+    margin: 0 0 .28em 0;
+  }
+
+  .intro-admin__select {
+    background: none;
+  }
+
+  .intro-admin__select select {
+    border: none;
+    padding: 0;
+    text-align-last: right;
+  }
+
+  .input-group > .locale-input {
+    display: none;
+  }
+
+  .input-group > .locale-input.active {
+    display: inline-block;
+  }
+}
+
 // steps
 
 .intro-admin__steps .add-step-button {

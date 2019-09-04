@@ -63,6 +63,7 @@
 
     if (!intro) return
 
+    var locales = intro.locales
     var locale = intro.locale
     var shepherdOptions = intro.shepherd_options
 
@@ -95,7 +96,8 @@
     }
 
     Tour.prototype.configure = function () {
-      locale.complete = this.tour.options.btn_complete_text || locale.complete
+      var btnCompleteText = this.tour.options['btn_complete_text_' + locale] || this.tour.options.btn_complete_text
+      locales.complete = btnCompleteText || locales.complete
 
       this.configureSteps(this.tour.options.steps)
 
@@ -118,20 +120,22 @@
     Tour.prototype.configureStepBase = function (step, index) {
       var options = {}
       var popperOptions = {}
+      var stepTitle = step['title_' + locale] || step.title
+      var stepContent = step['content_' + locale] || step.content
 
       options.id = 'tour-' + index
 
-      if (step.title) {
-        options.title = step.title
+      if (stepTitle) {
+        options.title = stepTitle
       }
 
       if (step.image_url) {
         options.text = '<div class="shepherd-image-box" x-placement="' + (step.image_placement || 'top') + '">' +
                           '<div class="shepherd-image-box-content"><img height="' + step.image_height + 'px" width="' + step.image_width + 'px" src="' + encodeURI(step.image_url) + '"></div>' +
-                          (step.content ? ('<div class="shepherd-image-box-text">' + step.content + '</div>') : '') +
+                          (stepContent ? ('<div class="shepherd-image-box-text">' + stepContent + '</div>') : '') +
                        '</div>'
-      } else if (step.content) {
-        options.text = '<div class="shepherd-text-box">' + step.content + '</div>'
+      } else if (stepContent) {
+        options.text = '<div class="shepherd-text-box">' + stepContent + '</div>'
       }
 
       if (step.element) {
@@ -169,21 +173,21 @@
 
       if (this.tour.options.btn_visible == 1) {
         if (index === 0) {
-          options.buttons = [{ text: locale.exit, action: this.shepherd.cancel, secondary: true }]
+          options.buttons = [{ text: locales.exit, action: this.shepherd.cancel, secondary: true }]
           if (steps.length === 1) {
-            options.buttons.push({ text: locale.complete, action: this.shepherd.complete })
+            options.buttons.push({ text: locales.complete, action: this.shepherd.complete })
           } else {
-            options.buttons.push({ text: locale.next, action: this.next.bind(this) })
+            options.buttons.push({ text: locales.next, action: this.next.bind(this) })
           }
         } else if (index === steps.length - 1) {
           options.buttons = [
-            { text: locale.back, action: this.shepherd.back, secondary: true },
-            { text: locale.complete, action: this.shepherd.complete }
+            { text: locales.back, action: this.shepherd.back, secondary: true },
+            { text: locales.complete, action: this.shepherd.complete }
           ]
         } else {
           options.buttons = [
-            { text: locale.back, action: this.shepherd.back, secondary: true },
-            { text: locale.next, action: this.next.bind(this) }
+            { text: locales.back, action: this.shepherd.back, secondary: true },
+            { text: locales.next, action: this.next.bind(this) }
           ]
         }
       } else {

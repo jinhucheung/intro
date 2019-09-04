@@ -10,7 +10,8 @@ module Intro
           original_url: request.original_url,
           tours_path: intro.tours_path,
           record_tours_path: intro.record_tours_path,
-          locale: t('intro.tour'),
+          locales: t('intro.tour'),
+          locale: I18n.locale,
           shepherd_options: options[:shepherd] || {}
         }.freeze
 

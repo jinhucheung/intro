@@ -71,8 +71,6 @@ module Intro
       end
     end
 
-    protected
-
     def format_attributes
       %i[ident controller_path action_name].each do |attribute|
         strip_attribute = send(attribute).try(:strip)

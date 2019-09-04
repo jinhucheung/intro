@@ -1,0 +1,17 @@
+<% text_tag_method = :textarea == input[:type] ? :text_area_tag : :text_field_tag %>
+<% render_locale_input = ->(locale, options) { send(text_tag_method, input[:name].to_s.gsub(/\[(\w+)\]$/, "[\\1_#{locale}]"), (input[:value].is_a?(Hash) ? input[:value][locale] : input[:value]), options) } %>
+
+<div class='field local-field'>
+  <div class='header'>
+    <%= label_tag label[:name], label[:content] %>
+    <div class='intro-admin__select'>
+      <%= select_tag '_', options_for_select(I18n.available_locales, I18n.locale), class: 'js-intro-admin__locale-select' %>
+    </div>
+  </div>
+  <div class='input-group'>
+    <% I18n.available_locales.each do |locale| %>
+      <% input_class = "locale-input #{input[:options][:class] rescue ''} #{'active' if locale == I18n.locale}"  %>
+      <%= render_locale_input.call(locale, input[:options].merge(class: input_class, 'data-locale' => locale)) %>
+    <% end %>
+  </div>
+</div>

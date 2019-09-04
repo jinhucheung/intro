@@ -3,19 +3,21 @@
 [![Gem Version](https://badge.fury.io/rb/intro.svg)](https://badge.fury.io/rb/intro)
 [![Build Status](https://travis-ci.org/jinhucheung/intro.svg?branch=master)](https://travis-ci.org/jinhucheung/intro)
 
+[中文文档 Chinese document](/README-CN.md)
+
 Intro brings your rails application to new feature introduction and step-by-step users guide.
 
-Intro injects dynamically-generated [Shepherd.js](https://github.com/shipshapecode/shepherd) code into  your application whenever user should see a guided tour.
+Intro injects dynamically-generated [Shepherd.js](https://github.com/shipshapecode/shepherd) code into your application whenever user should see a guided tour.
 
-+ Define tour content supports image in a backstage.
++ Define tour content in a backstage.
++ Tour content supports image, many languages.
 + Easy to change tours styles or add a theme.
 + Play nicely with Turbolinks.
 + Friendly to non-developers.
 
-## Todo
+## Example
 
-+ Supporting tour content with many languages.
-+ Supporting to display tour when user is not logined.
+![example](https://user-images.githubusercontent.com/19590194/64253419-dbe38d80-cf4f-11e9-9aab-b1e6058990ab.png)
 
 ## Demo
 

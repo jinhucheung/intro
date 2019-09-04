@@ -13,15 +13,15 @@
   </div>
 
   <div class='intro-admin__step-content'>
-    <div class='field'>
-      <%= label_tag :component_title, t('intro.admin.component.title') %>
-      <%= text_field_tag "#{step_prefix}[title]", step['title'], placeholder: t('intro.admin.placeholders.title') %>
-    </div>
+    <%= render 'local_field',
+      label: { name: :component_title, content: t('intro.admin.component.title') },
+      input: { name: "#{step_prefix}[title]", value: step['title'], options: { placeholder: t('intro.admin.placeholders.title') } }
+    %>
 
-    <div class='field'>
-      <%= label_tag :component_content, t('intro.admin.component.content') %>
-      <%= text_area_tag "#{step_prefix}[content]", step['content'], placeholder: t('intro.admin.placeholders.content'), class: 'content-textarea' %>
-    </div>
+    <%= render 'local_field',
+      label: { name: :component_content, content: t('intro.admin.component.content') },
+      input: { type: :textarea, name: "#{step_prefix}[content]", value: step['content'], options: { placeholder: t('intro.admin.placeholders.content', class: 'content-textarea') } }
+    %>
 
     <div class='two fields'>
       <div class='field'>

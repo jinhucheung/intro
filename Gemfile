@@ -13,3 +13,5 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+# Fix 'cannot load such file -- sass' for sass-rails 6.0 (https://github.com/sass/sassc-rails/issues/114)
+gem 'sass-rails'

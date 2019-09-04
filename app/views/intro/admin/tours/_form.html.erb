@@ -74,10 +74,10 @@
       </div>
 
       <div class='two fields js-intro-complete-btn-fields <%= 'intro-admin__hide' unless btn_visible %>'>
-        <div class='field'>
-          <%= label_tag :btn_complete_text, t('intro.admin.tour.btn_complete_text') %>
-          <%= text_field_tag 'tour[options][btn_complete_text]', @tour.options['btn_complete_text'], placeholder: t('intro.admin.placeholders.btn_complete_text') %>
-        </div>
+        <%= render 'local_field',
+          label: { name: :btn_complete_text, content: t('intro.admin.tour.btn_complete_text') },
+          input: { name: 'tour[options][btn_complete_text]', value: @tour.options['btn_complete_text'], options: { placeholder: t('intro.admin.placeholders.btn_complete_text') } }
+        %>
 
         <div class='field'>
           <%= label_tag :btn_complete_link, t('intro.admin.tour.btn_complete_link') %>
@@ -148,7 +148,7 @@
       $.ajax({
         method: 'POST',
         url: "<%= attempt_admin_tours_path %>",
-        data: $form.serialize().replace(/&_method=put&/i, '&_method=post&'),
+        data: $form.serialize().replace(/&_method=(put|patch)&/i, '&_method=post&'),
         beforeSend: function () {
           $this.addClass('intro-loading')
           introTour && introTour.hide()
@@ -183,6 +183,15 @@
         $completeBtnFields.addClass('intro-admin__hide')
         $field.css('marginBottom', '1em')
       }
+    })
+
+    // local field
+    $('.intro-admin__tour-form').on('change', '.js-intro-admin__locale-select', function () {
+      var $this = $(this)
+      var $field = $this.closest('.field')
+
+      $field.find('.locale-input').removeClass('active')
+      $field.find('.locale-input[data-locale="' + $this.val() + '"]').addClass('active')
     })
   })
 </script>
