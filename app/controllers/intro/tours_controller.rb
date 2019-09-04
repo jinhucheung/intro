@@ -3,14 +3,16 @@ require 'uri'
 module Intro
   class ToursController < ::Intro::ApplicationController
     if Rails::VERSION::MAJOR > 3
-      before_action :authenticate
+      before_action :authenticate, only: :record
       before_action :require_tour, only: :record
     else
-      before_filter :authenticate
+      before_filter :authenticate, only: :record
       before_filter :require_tour, only: :record
     end
 
     def index
+      return render_unauthorized unless Intro.config.visible_without_signing_in || current_user
+
       tours = Intro::Tour.with_controller_and_action(params[:controller_path], params[:action_name])
       tours = tours.published
 
@@ -19,6 +21,7 @@ module Intro
       tours = filter_tours_by_route(tours)
       tours = filter_tours_by_histories(tours)
       tours = filter_tours_by_expired_time(tours)
+      tours = filter_tours_by_signed_in(tours)
 
       render json: { data: tours.map(&:expose_attributes) }
     end
@@ -31,8 +34,12 @@ module Intro
 
     protected
 
+    def render_unauthorized
+      render json: { message: t('intro.errors.unauthorized') }, status: :unauthorized
+    end
+
     def authenticate
-      render json: { message: t('intro.errors.unauthorized') }, status: :unauthorized unless current_user
+      render_unauthorized unless current_user
     end
 
     def require_tour
@@ -87,6 +94,14 @@ module Intro
 
     def filter_tours_by_expired_time(tours)
       tours.reject(&:expired?)
+    end
+
+    def filter_tours_by_signed_in(tours)
+      if Intro.config.visible_without_signing_in && !current_user
+        tours.select {|tour| tour.options['not_sign_visible'] rescue false}
+      else
+        tours
+      end
     end
   end
 end

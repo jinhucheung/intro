@@ -76,6 +76,7 @@ en:
         fixed_placement: Fixed component to ensure the correct placement
         btn_visible: Use buttons
         overlay_visible: Use modal overlay
+        not_sign_visible: Display tour without signing in
         btn_complete_text: Enter the text of button
         btn_complete_link: Enter the link of button
         cancel_link: Show a cancel icon in the header of the component

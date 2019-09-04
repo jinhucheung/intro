@@ -57,6 +57,15 @@
   <details class='field'>
     <summary><%= t('intro.admin.others') %></summary>
     <div class='intro-admin__tour-others'>
+      <% if Intro.config.visible_without_signing_in %>
+        <div class='field'>
+          <div class='checkbox intro-admin__checkbox'>
+            <%= check_box_tag 'tour[options][not_sign_visible]', 1, @tour.options['not_sign_visible'] %>
+            <%= label_tag 'tour[options][not_sign_visible]', t('intro.admin.placeholders.not_sign_visible') %>
+          </div>
+        </div>
+      <% end %>
+
       <div class='field'>
         <div class='checkbox intro-admin__checkbox'>
           <%= check_box_tag 'tour[options][overlay_visible]', 1, @tour.options['overlay_visible'] %>
@@ -76,7 +85,7 @@
       <div class='two fields js-intro-complete-btn-fields <%= 'intro-admin__hide' unless btn_visible %>'>
         <%= render 'local_field',
           label: { name: :btn_complete_text, content: t('intro.admin.tour.btn_complete_text') },
-          input: { name: 'tour[options][btn_complete_text]', value: @tour.options['btn_complete_text'], options: { placeholder: t('intro.admin.placeholders.btn_complete_text') } }
+          input: { name: 'tour[options][btn_complete_text]', object: @tour.options, attr: :btn_complete_text, options: { placeholder: t('intro.admin.placeholders.btn_complete_text') } }
         %>
 
         <div class='field'>

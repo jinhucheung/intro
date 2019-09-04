@@ -1,5 +1,11 @@
 <% text_tag_method = :textarea == input[:type] ? :text_area_tag : :text_field_tag %>
-<% render_locale_input = ->(locale, options) { send(text_tag_method, input[:name].to_s.gsub(/\[(\w+)\]$/, "[\\1_#{locale}]"), (input[:value].is_a?(Hash) ? input[:value][locale] : input[:value]), options) } %>
+<% render_locale_input = ->(locale, options) do
+    send(text_tag_method,
+      input[:name].to_s.gsub(/\[(\w+)\]$/, "[\\1_#{locale}]"),
+      (input[:object]["#{input[:attr]}_#{locale}"].presence || input[:object][input[:attr].to_s] rescue ''),
+      options)
+  end
+%>
 
 <div class='field local-field'>
   <div class='header'>

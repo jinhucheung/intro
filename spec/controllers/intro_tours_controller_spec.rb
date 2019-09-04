@@ -7,12 +7,58 @@ describe Intro::ToursController, type: :controller do
   let(:published_tour) { create(:intro_tour, controller_path: 'intro/admin/tours', action_name: 'new', published:  true) }
 
   context 'unauthorized' do
-    it 'should get unauthorized response' do
-      get :index, controller_path: 'x', action_name: 'x', format: :json
-      expect(response).to have_http_status(:unauthorized)
+    context '#index' do
+      before do
+        Intro::Tour.destroy_all
+      end
 
-      post :record, id: 0
-      expect(response).to have_http_status(:unauthorized)
+      it 'should get unauthorized response if disable `visible_without_signing_in`' do
+        revert_intro_config do
+          Intro.config.visible_without_signing_in = false
+          get :index, controller_path: 'x', action_name: 'x', format: :json
+          expect(response).to have_http_status(:unauthorized)
+        end
+      end
+
+      it 'should get ok response if enable `visible_without_signing_in`' do
+        revert_intro_config do
+          Intro.config.visible_without_signing_in = true
+          get :index, controller_path: 'x', action_name: 'x', format: :json
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      it 'should get empty data with publish tour diable not_sign_visible' do
+        revert_intro_config do
+          Intro.config.visible_without_signing_in = true
+          published_tour
+
+          get :index, controller_path: 'intro/admin/tours', action_name: 'new'
+          expect(response).to be_success
+          expect(json_body).not_to be_nil
+          expect(json_body[:data]).to be_empty
+        end
+      end
+
+      it 'should get tours data with publish tour enable not_sign_visible' do
+        revert_intro_config do
+          Intro.config.visible_without_signing_in = true
+          published_tour.options['not_sign_visible'] = true
+          published_tour.save
+
+          get :index, controller_path: 'intro/admin/tours', action_name: 'new'
+          expect(response).to be_success
+          expect(json_body).not_to be_nil
+          expect(json_body[:data]).not_to be_empty
+        end
+      end
+    end
+
+    context '#record' do
+      it 'should get unauthorized response' do
+        post :record, id: 0
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
   end
 
@@ -182,6 +228,31 @@ describe Intro::ToursController, type: :controller do
         get :index, controller_path: 'intro/admin/tours', action_name: 'new', original_url: '/intro/admin/tours/new?xyz=1&abc=2'
         expect(json_body).not_to be_nil
         expect(json_body[:data]).not_to be_empty
+      end
+
+      it 'should get tour data with publish tour diable not_sign_visible' do
+        revert_intro_config do
+          Intro.config.visible_without_signing_in = true
+          published_tour
+
+          get :index, controller_path: 'intro/admin/tours', action_name: 'new'
+          expect(response).to be_success
+          expect(json_body).not_to be_nil
+          expect(json_body[:data]).not_to be_empty
+        end
+      end
+
+      it 'should get tours data with publish tour enable not_sign_visible' do
+        revert_intro_config do
+          Intro.config.visible_without_signing_in = true
+          published_tour.options['not_sign_visible'] = true
+          published_tour.save
+
+          get :index, controller_path: 'intro/admin/tours', action_name: 'new'
+          expect(response).to be_success
+          expect(json_body).not_to be_nil
+          expect(json_body[:data]).not_to be_empty
+        end
       end
     end
 

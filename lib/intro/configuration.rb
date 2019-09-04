@@ -33,6 +33,9 @@ module Intro
     # use `Rails.cache` to store tours status, change `config.cache_store` for different strategies
     attr_accessor :cache
 
+    # display tour without signing in, default: false
+    attr_accessor :visible_without_signing_in
+
     def initialize
       @enable = true
 

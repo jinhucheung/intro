@@ -12,6 +12,7 @@ module Intro
           record_tours_path: intro.record_tours_path,
           locales: t('intro.tour'),
           locale: I18n.locale,
+          signed: !!send(Intro.config.current_user_method),
           shepherd_options: options[:shepherd] || {}
         }.freeze
 
@@ -23,9 +24,9 @@ module Intro
       end
 
       def enable_intro?
-        return false unless Intro.config.enable
+        return false unless Intro.config.enable && request.get? && !request.xhr?
 
-        return false unless request.get? && !request.xhr? && send(Intro.config.current_user_method)
+        return false unless Intro.config.visible_without_signing_in || send(Intro.config.current_user_method)
 
         return true unless Intro.config.cache
 

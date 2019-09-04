@@ -263,6 +263,8 @@
 
       createCookie('intro-tour-' + this.tour.id, (action || 'complete'), 7300)
 
+      if (!intro.signed) return
+
       var xhr = new XMLHttpRequest()
       var csrfToken = document.querySelector('meta[name="csrf-token"]')
 

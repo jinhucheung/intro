@@ -15,12 +15,12 @@
   <div class='intro-admin__step-content'>
     <%= render 'local_field',
       label: { name: :component_title, content: t('intro.admin.component.title') },
-      input: { name: "#{step_prefix}[title]", value: step['title'], options: { placeholder: t('intro.admin.placeholders.title') } }
+      input: { name: "#{step_prefix}[title]", object: step, attr: :title, options: { placeholder: t('intro.admin.placeholders.title') } }
     %>
 
     <%= render 'local_field',
       label: { name: :component_content, content: t('intro.admin.component.content') },
-      input: { type: :textarea, name: "#{step_prefix}[content]", value: step['content'], options: { placeholder: t('intro.admin.placeholders.content', class: 'content-textarea') } }
+      input: { type: :textarea, name: "#{step_prefix}[content]", object: step, attr: :content, options: { placeholder: t('intro.admin.placeholders.content', class: 'content-textarea') } }
     %>
 
     <div class='two fields'>
