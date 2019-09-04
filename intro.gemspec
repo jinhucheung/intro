@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "carrierwave"
   s.add_dependency "kaminari", ">= 0.17.0"
   s.add_dependency "sprockets"
-  s.add_dependency "shepherdjs_rails", "5.0.1"
+  s.add_dependency "shepherdjs_rails", "4.6.0"
   s.add_dependency "jquery-rails"
   s.add_dependency "sass-rails"
 
