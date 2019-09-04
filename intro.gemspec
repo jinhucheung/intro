@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sprockets"
   s.add_dependency "shepherdjs_rails", "5.0.1"
   s.add_dependency "jquery-rails"
-  s.add_dependency "sass-rails", "6.0.0"
+  s.add_dependency "sass-rails"
 
   s.add_development_dependency "sqlite3", "1.3.13"
   s.add_development_dependency "rspec-rails"
