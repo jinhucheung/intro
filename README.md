@@ -21,7 +21,7 @@ Intro injects dynamically-generated [Shepherd.js](https://github.com/shipshapeco
 
 ## Demo
 
-[Demo](https://intro-demo.herokuapp.com/)
+[Demo](https://intro-demo.herokuapp.com/): [Source](https://github.com/jinhucheung/intro-demo)
 
 ## Installation
 

@@ -17,7 +17,7 @@ Intro 帮助开发者方便地在 Rails 应用添加新功能介绍以及用户�
 
 ## 演示
 
-[Demo](https://intro-demo.herokuapp.com/)
+[Demo](https://intro-demo.herokuapp.com/): [Source](https://github.com/jinhucheung/intro-demo)
 
 ## 安装
 
