@@ -88,7 +88,7 @@ app/assets/stylesheets/intro/shepherd/base.scss
 
 查看 `config/initializers/intro.rb` 获取详情的配置信息
 
-## Thanks
+## 致谢
 
 + [shepherd](https://github.com/shipshapecode/shepherd)
 + [abraham](https://github.com/actmd/abraham)
