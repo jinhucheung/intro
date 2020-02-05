@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/intro.svg)](https://badge.fury.io/rb/intro)
 [![Build Status](https://travis-ci.org/jinhucheung/intro.svg?branch=master)](https://travis-ci.org/jinhucheung/intro)
 
-Intro 帮助开发者方便地在 Rails 应用添加新功能介绍以及用户指引，她根据用户是否需要功能引导，动态注入了 [Shepherd.js](https://github.com/shipshapecode/shepherd) 脚本至应用中。Intro 包含以下功能：
+Intro 为 Rails 应用添加新功能介绍以及用户指引，她根据用户是否需要功能引导，动态注入了 [Shepherd.js](https://github.com/shipshapecode/shepherd) 脚本至应用中。Intro 包含以下功能：
 
 + 可在后台中管理用户引导
 + 引导内容支持多语言及图片上传
@@ -93,17 +93,17 @@ app/assets/stylesheets/intro/shepherd/base.scss
 + [shepherd](https://github.com/shipshapecode/shepherd)
 + [abraham](https://github.com/actmd/abraham)
 
-## Contributing
+## 贡献
 
-Bug report or pull request are welcome.
+欢迎报告 Bug 或提交 Pull Request。
 
-1. Fork it
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
+1. 分叉此仓库
+2. 创建你的功能分支 (git checkout -b my-new-feature)
+3. 提交你的改动 (git commit -am 'Add some feature')
+4. 推送到当前分支 (git push origin my-new-feature)
 
-Please write unit test with your code if necessary.
+如有必要，请为你的代码编写单元测试。
 
-## License
+## 许可
 
-The gem is available as open source under the terms of the [MIT License](MIT-LICENSE).
+根据 [MIT](MIT-LICENSE) 许可的条款，此仓库可作为开放源代码使用。
