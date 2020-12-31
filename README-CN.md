@@ -45,6 +45,12 @@ $ rails generate intro:install
 $ rails db:migrate
 ```
 
+然后编译资源:
+
+```
+$ rails intro:webpacker:compile
+```
+
 ## 使用
 
 ### 将资源文件添加至视图

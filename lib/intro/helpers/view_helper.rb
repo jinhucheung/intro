@@ -16,10 +16,15 @@ module Intro
           shepherd_options: options[:shepherd] || {}
         }.freeze
 
+        intro_helper = self.dup
+        intro_helper.define_singleton_method(:current_webpacker_instance) do
+          Intro.webpacker
+        end
+
         <<-HTML.html_safe
           <script>window._intro = #{ intro_options.to_json }</script>
-          #{javascript_pack_tag('intro/application')}
-          #{stylesheet_pack_tag('intro/application')}
+          #{intro_helper.javascript_pack_tag('intro/application')}
+          #{intro_helper.stylesheet_pack_tag('intro/application')}
         HTML
       end
 

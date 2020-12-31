@@ -49,6 +49,12 @@ Then do migrate:
 $ rails db:migrate
 ```
 
+Compile intro assets:
+
+```
+$ rails intro:webpacker:compile
+```
+
 ## Usage
 
 ### Inserting assets into view
