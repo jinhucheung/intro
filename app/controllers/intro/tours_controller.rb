@@ -28,7 +28,8 @@ module Intro
 
     def record
       history = Intro::TourHistory.with_user_and_tour(current_user, @tour).first_or_initialize
-      history.increment!(:touch_count)
+      history.increment(:touch_count)
+      history.save
       render json: { message: t('intro.admin.update_success') }
     end
 

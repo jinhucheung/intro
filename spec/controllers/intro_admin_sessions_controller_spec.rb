@@ -6,7 +6,7 @@ describe Intro::Admin::SessionsController, type: :controller do
   context '#new' do
     it 'should has same action' do
       get :new
-      expect(response).to be_success
+      expect(response.successful?).to  be true
     end
 
     it 'should render same template' do
@@ -17,7 +17,7 @@ describe Intro::Admin::SessionsController, type: :controller do
 
   context '#create' do
     it 'should be authenticated with valid intro admin account' do
-      post :create, { username: Intro.config.admin_username, password: Intro.config.admin_password }
+      post :create, params: { username: Intro.config.admin_username, password: Intro.config.admin_password }
 
       expect(flash[:alert]).to be_nil
       expect(response).to have_http_status(:redirect)
@@ -25,12 +25,12 @@ describe Intro::Admin::SessionsController, type: :controller do
     end
 
     it 'should be unauthenticated with invalid admin username or password' do
-      post :create, { username: 'test_user', password: Intro.config.admin_password }
+      post :create, params: { username: 'test_user', password: Intro.config.admin_password }
 
       expect(flash[:alert]).not_to be_empty
       expect(response).to render_template(:new)
 
-      post :create, { username: Intro.config.admin_username, password: 'qwe123' }
+      post :create, params: { username: Intro.config.admin_username, password: 'qwe123' }
 
       expect(flash[:alert]).not_to be_empty
       expect(response).to render_template(:new)
@@ -40,7 +40,7 @@ describe Intro::Admin::SessionsController, type: :controller do
       revert_intro_config do
         Intro.config.admin_authenticate_account = -> { params[:username] == 'root' && params[:password] == 'qwe123' }
 
-        post :create, { username: 'root', password: 'qwe123' }
+        post :create, params: { username: 'root', password: 'qwe123' }
 
         expect(flash[:alert]).to be_nil
         expect(response).to have_http_status(:redirect)
@@ -52,7 +52,7 @@ describe Intro::Admin::SessionsController, type: :controller do
       revert_intro_config do
         Intro.config.admin_authenticate_account = -> { params[:username] == 'root' && params[:password] == 'qwe123' }
 
-        post :create, { username: 'test', password: 'test123' }
+        post :create, params: { username: 'test', password: 'test123' }
 
         expect(flash[:alert]).not_to be_empty
         expect(response).to render_template(:new)
@@ -62,7 +62,7 @@ describe Intro::Admin::SessionsController, type: :controller do
 
   context '#sign_out' do
     it 'should clear session for signed user' do
-      post :create, { username: Intro.config.admin_username, password: Intro.config.admin_password }
+      post :create, params: { username: Intro.config.admin_username, password: Intro.config.admin_password }
       expect(session[:intro_admin_authenticated]).not_to be_nil
 
       delete :sign_out

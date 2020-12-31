@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Intro::Admin::ImagesController, type: :controller do
   routes { Intro::Engine.routes }
 
-  let(:image) { fixture_file_upload('ruby.png', 'image/png') }
+  let(:image) { Rack::Test::UploadedFile.new('spec/fixtures/ruby.png', 'image/png') }
 
   context 'unauthorized' do
     it 'should get unauthorized status' do
@@ -30,9 +30,9 @@ describe Intro::Admin::ImagesController, type: :controller do
       it 'should successfully upload with image' do
         self.class.fixture_path = File.expand_path('../../fixtures', __FILE__)  if self.class.respond_to?(:fixture_path) && !self.class.fixture_path
 
-        post :create, image: image, format: :json
+        post :create, params: { image: image }, format: :json
 
-        expect(response).to be_success
+        expect(response.successful?).to  be true
         expect(json_body[:data]).not_to be_nil
         expect(json_body[:data][:url]).not_to be_nil
       end
