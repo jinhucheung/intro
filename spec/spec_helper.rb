@@ -20,6 +20,9 @@ require 'factory_bot_rails'
 require 'shoulda/matchers'
 require 'byebug'
 require 'test_helper'
+require 'rails-controller-testing'
+
+Rails::Controller::Testing.install
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

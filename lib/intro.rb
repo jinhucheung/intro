@@ -1,7 +1,6 @@
-require 'shepherdjs_rails'
+require 'webpacker'
 require 'carrierwave'
 require 'kaminari'
-require 'jquery-rails'
 
 require 'intro/engine'
 require 'intro/cache'
@@ -20,6 +19,13 @@ module Intro
 
     def cache
       Intro::Cache
+    end
+
+    def webpacker
+      @webpacker ||= ::Webpacker::Instance.new(
+        root_path: Intro::Engine.root,
+        config_path: Intro::Engine.root.join('config', 'webpacker.yml')
+      )
     end
   end
 end

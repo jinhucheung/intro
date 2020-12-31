@@ -3,12 +3,13 @@
   <head>
     <meta charset='utf-8'>
     <title><%= [yield(:doc_title).presence, t('intro.admin.title')].compact.join(' · ') %></title>
-    <%= stylesheet_link_tag    "intro/admin/application", media: "all" %>
-    <%= javascript_include_tag "intro/admin/application" %>
+    <%= stylesheet_pack_tag "intro/admin/application", media: "all" %>
+    <%= javascript_pack_tag "intro/admin/application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head_content) %>
   </head>
   <body class="intro-admin__body <%= yield(:body_class) %>">
     <%= yield %>
+    <%= intro_tags %>
   </body>
 </html>

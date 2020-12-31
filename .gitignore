@@ -8,7 +8,12 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/.byebug_history
 spec/dummy/public/uploads/
-Gemfile.lock
 .byebug_history
 *.gem
 .idea
+node_modules/
+public/intro-packs
+public/intro-packs/manifest.json
+!public/.keep
+yarn-error.log
+tmp/cache/webpacker/

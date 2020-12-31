@@ -22,19 +22,19 @@ describe Intro::Admin::ToursController, type: :controller do
       post :attempt
       expect(response).to redirect_to unauthenticated_path
 
-      get :show, id: 0
+      get :show, params: {id: 0}
       expect(response).to redirect_to unauthenticated_path
 
-      get :edit, id: 0
+      get :edit, params: {id: 0}
       expect(response).to redirect_to unauthenticated_path
 
-      put :update, id: 0
+      put :update, params: {id: 0}
       expect(response).to redirect_to unauthenticated_path
 
-      delete :destroy, id: 0
+      delete :destroy, params: {id: 0}
       expect(response).to redirect_to unauthenticated_path
 
-      put :publish, id: 0
+      put :publish, params: {id: 0}
       expect(response).to redirect_to unauthenticated_path
     end
 
@@ -59,7 +59,7 @@ describe Intro::Admin::ToursController, type: :controller do
     context '#index' do
       it 'should render index template' do
         get :index
-        expect(response).to be_success
+        expect(response.successful?).to  be true
         expect(response).to render_template(:index)
         expect(response).to have_http_status(:success)
       end
@@ -74,7 +74,7 @@ describe Intro::Admin::ToursController, type: :controller do
     context '#new' do
       it 'should render new template' do
         get :new
-        expect(response).to be_success
+        expect(response.successful?).to  be true
         expect(response).to render_template(:new)
         expect(response).to have_http_status(:success)
       end
@@ -88,13 +88,13 @@ describe Intro::Admin::ToursController, type: :controller do
 
     context '#create' do
       it 'should successfully create tour with ident' do
-        expect { post :create, tour: { ident: random_string } }.to change { Intro::Tour.count }.by(1)
+        expect { post :create, params: { tour: { ident: random_string } } }.to change { Intro::Tour.count }.by(1)
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to admin_tour_path(assigns(:tour))
       end
 
       it 'failed to create tour without ident' do
-        expect { post :create, tour: {} }.to change { Intro::Tour.count }.by(0)
+        expect { post :create, params: { tour: {} } }.to change { Intro::Tour.count }.by(0)
         expect(assigns(:tour)).not_to be_nil
         expect(response).to render_template(:new)
         expect(response).to have_http_status(:success)
@@ -103,7 +103,7 @@ describe Intro::Admin::ToursController, type: :controller do
 
     context '#route' do
       it 'should get route with path' do
-        get :route, path: '/intro/admin/tours?xyz=1', format: :json
+        get :route, params: { path: '/intro/admin/tours?xyz=1' }, format: :json
 
         expect(response).to have_http_status(:success)
         expect(response.body).not_to be_nil
@@ -117,7 +117,7 @@ describe Intro::Admin::ToursController, type: :controller do
 
     context '#attempt' do
       it 'should get tour options with options' do
-        post :attempt, tour: { options: { title: 'title', content: 'content' } }, format: :json
+        post :attempt, params: { tour: { options: { title: 'title', content: 'content' } } }, format: :json
 
         expect(response).to have_http_status(:success)
         expect(json_body[:data]).not_to be_nil
@@ -127,7 +127,7 @@ describe Intro::Admin::ToursController, type: :controller do
       end
 
       it 'should not get tour options without options' do
-        post :attempt, tour: {}, format: :json
+        post :attempt, params: { tour: {} }, format: :json
 
         expect(response).to have_http_status(:success)
         expect(json_body[:data]).not_to be_nil
@@ -137,22 +137,22 @@ describe Intro::Admin::ToursController, type: :controller do
 
     context 'without tour' do
       it 'should get not found' do
-        get :show, id: 0
+        get :show, params: {id: 0}
         expect(response).to redirect_to admin_tours_path
 
-        get :show, id: 0, format: :json
+        get :show, params: {id: 0}, format: :json
         expect(response).to have_http_status(:not_found)
 
-        get :edit, id: 0
+        get :edit, params: {id: 0}
         expect(response).to redirect_to admin_tours_path
 
-        put :update, id: 0
+        put :update, params: {id: 0}
         expect(response).to redirect_to admin_tours_path
 
-        delete :destroy, id: 0
+        delete :destroy, params: {id: 0}
         expect(response).to redirect_to admin_tours_path
 
-        put :publish, id: 0
+        put :publish, params: {id: 0}
         expect(response).to redirect_to admin_tours_path
       end
     end
@@ -160,7 +160,7 @@ describe Intro::Admin::ToursController, type: :controller do
     context 'with tour' do
       context '#show' do
         it 'should render edit template' do
-          get :show, id: tour.id
+          get :show, params: { id: tour.id }
           expect(assigns(:tour)).not_to be_nil
           expect(response).to render_template(:edit)
           expect(response).to have_http_status(:success)
@@ -169,7 +169,7 @@ describe Intro::Admin::ToursController, type: :controller do
 
       context '#edit' do
         it 'should render edit template' do
-          get :show, id: tour.id
+          get :show, params: { id: tour.id }
           expect(assigns(:tour)).not_to be_nil
           expect(response).to render_template(:edit)
           expect(response).to have_http_status(:success)
@@ -178,35 +178,35 @@ describe Intro::Admin::ToursController, type: :controller do
 
       context '#update' do
         it 'should render edit template' do
-          put :update, id: tour.id, tour: { ident: "new-#{tour.ident}" }
+          put :update, params: { id: tour.id, tour: { ident: "new-#{tour.ident}" } }
           expect(assigns(:tour)).not_to be_nil
           expect(response).to render_template(:edit)
         end
 
         it 'should successfully update tour with valid ident' do
           new_ident = "new-#{tour.ident}"
-          put :update, id: tour.id, tour: { ident: new_ident }
+          put :update, params: { id: tour.id, tour: { ident: new_ident } }
           expect(assigns(:tour).previous_changes).to have_key('ident')
           expect(assigns(:tour).ident).to eq new_ident
         end
 
         it 'should successfully update tour with valid controller' do
           new_controller = "new-#{tour.controller_path}"
-          put :update, id: tour.id, tour: { controller_path: new_controller }
+          put :update, params: { id: tour.id, tour: { controller_path: new_controller } }
           expect(assigns(:tour).previous_changes).to have_key('controller_path')
           expect(assigns(:tour).controller_path).to eq new_controller
         end
 
         it 'should successfully update tour with valid action' do
           new_action = "new-#{tour.action_name}"
-          put :update, id: tour.id, tour: { action_name: new_action }
+          put :update, params: { id: tour.id, tour: { action_name: new_action } }
           expect(assigns(:tour).previous_changes).to have_key('action_name')
           expect(assigns(:tour).action_name).to eq new_action
         end
 
         it 'should successfully update tour with valid options' do
           options = { title: 'title' }
-          put :update, id: tour.id, tour: { options: options }
+          put :update, params: { id: tour.id, tour: { options: options } }
           expect(assigns(:tour).previous_changes).to have_key('options')
           expect(assigns(:tour).options).not_to be_nil
           expect(assigns(:tour).options['title']).to eq 'title'
@@ -214,7 +214,7 @@ describe Intro::Admin::ToursController, type: :controller do
 
         it 'should successfully update tour with valid route' do
           route = { simple: '/' }
-          put :update, id: tour.id, tour: { route: route }
+          put :update, params: { id: tour.id, tour: { route: route } }
           expect(assigns(:tour).previous_changes).to have_key('route')
           expect(assigns(:tour).route).not_to be_nil
           expect(assigns(:tour).route['simple']).to eq '/'
@@ -222,7 +222,7 @@ describe Intro::Admin::ToursController, type: :controller do
 
         it 'should successfully update tour with valid expired time' do
           new_expired_at = 1.day.since.strftime('%F')
-          put :update, id: tour.id, tour: { expired_at: new_expired_at }
+          put :update, params: { id: tour.id, tour: { expired_at: new_expired_at } }
           expect(assigns(:tour).previous_changes).to have_key('expired_at')
           expect(assigns(:tour).expired_at.strftime('%F')).to eq new_expired_at
         end
@@ -230,7 +230,7 @@ describe Intro::Admin::ToursController, type: :controller do
 
       context '#destroy' do
         it 'should successfully destroy tour' do
-          delete :destroy, id: tour.id
+          delete :destroy, params: { id: tour.id }
           expect(assigns(:tour).destroyed?).to be true
           expect(response).to redirect_to admin_tours_path
         end
@@ -238,12 +238,12 @@ describe Intro::Admin::ToursController, type: :controller do
 
       context '#publish' do
         it 'should get published tour with active params' do
-          put :publish, id: tour.id, published: 'true'
+          put :publish, params: { id: tour.id, published: 'true' }
           expect(assigns(:tour).published).to be true
         end
 
         it 'should get unpublished tour with inactive params' do
-          put :publish, id: tour.id, published: 'false'
+          put :publish, params: { id: tour.id, published: 'false' }
           expect(assigns(:tour).published).to be false
         end
       end

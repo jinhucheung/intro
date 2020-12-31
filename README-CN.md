@@ -42,7 +42,13 @@ $ rails generate intro:install
 然后执行迁移:
 
 ```
-$ bundle exec rake db:migrate
+$ rails db:migrate
+```
+
+然后编译资源:
+
+```
+$ rails assets:precompile
 ```
 
 ## 使用
@@ -78,11 +84,20 @@ $ rails generate intro:assets
 你将会得到下面的文件:
 
 ```
-app/assets/stylesheets/intro/shepherd/_variables.scss
-app/assets/stylesheets/intro/shepherd/base.scss
+app/javascript/stylesheets/intro/_variables.scss
+app/javascript/stylesheets/intro/custom.scss
+app/javascript/packs/intro/custom.js
 ```
 
 更改它们以满足你的需要。
+
+最后，在 `intro_tags` 中引入 custom pack 文件。
+
+```
+<%= intro_tags do %>
+  <%= javascript_pack_tag('intro/custom') %>
+<% end %>
+```
 
 ### 配置 Intro
 
