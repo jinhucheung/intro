@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Intro brings your rails application to new feature introduction and step-by-step users guide"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "package.json", "postcss.config.js", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{bin,app,config,db,lib}/**/*", "package.json", "postcss.config.js", "public/.keep", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 6.0"

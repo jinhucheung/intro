@@ -16,15 +16,10 @@ module Intro
           shepherd_options: options[:shepherd] || {}
         }.freeze
 
-        intro_helper = self.dup
-        intro_helper.define_singleton_method(:current_webpacker_instance) do
-          Intro.webpacker
-        end
-
         <<-HTML.html_safe
           <script>window._intro = #{ intro_options.to_json }</script>
-          #{intro_helper.javascript_pack_tag('intro/application')}
-          #{intro_helper.stylesheet_pack_tag('intro/application')}
+          #{intro_webpacker_helper.javascript_pack_tag('intro/application')}
+          #{intro_webpacker_helper.stylesheet_pack_tag('intro/application')}
           #{capture(&block) if block_given?}
         HTML
       end
@@ -38,6 +33,16 @@ module Intro
 
         exist_tours = Intro.cache.read(controller_path, action_name)
         exist_tours || exist_tours.nil?
+      end
+
+      def intro_webpacker_helper
+        @intro_webpacker_helper ||= begin
+          instance = self.dup
+          instance.define_singleton_method(:current_webpacker_instance) do
+            Intro.webpacker
+          end
+          instance
+        end
       end
     end
   end

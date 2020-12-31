@@ -14,5 +14,6 @@ spec/dummy/public/uploads/
 node_modules/
 public/intro-packs
 public/intro-packs/manifest.json
+!public/.keep
 yarn-error.log
 tmp/cache/webpacker/
