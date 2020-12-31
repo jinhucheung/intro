@@ -46,7 +46,7 @@ $ rails generate intro:install
 Then do migrate:
 
 ```
-$ bundle exec rake db:migrate
+$ rails db:migrate
 ```
 
 ## Usage
@@ -82,8 +82,8 @@ $ rails generate intro:assets
 Then you would get the asset files:
 
 ```
-app/assets/stylesheets/intro/shepherd/_variables.scss
-app/assets/stylesheets/intro/shepherd/base.scss
+app/javascript/stylesheets/intro/shepherd/_variables.scss
+app/javascript/stylesheets/intro/shepherd/base.scss
 ```
 
 Change them for your need.

@@ -5,7 +5,7 @@ module Intro
       source_root File.expand_path('../../../..', __FILE__)
 
       def add_shepherd_stylesheets
-        directory 'app/assets/stylesheets/intro/shepherd'
+        directory 'app/javascript/stylesheets/intro/shepherd'
       end
     end
   end

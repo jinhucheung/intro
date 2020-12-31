@@ -42,7 +42,7 @@ $ rails generate intro:install
 然后执行迁移:
 
 ```
-$ bundle exec rake db:migrate
+$ rails db:migrate
 ```
 
 ## 使用
@@ -78,8 +78,8 @@ $ rails generate intro:assets
 你将会得到下面的文件:
 
 ```
-app/assets/stylesheets/intro/shepherd/_variables.scss
-app/assets/stylesheets/intro/shepherd/base.scss
+app/javascript/stylesheets/intro/shepherd/_variables.scss
+app/javascript/stylesheets/intro/shepherd/base.scss
 ```
 
 更改它们以满足你的需要。

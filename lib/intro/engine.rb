@@ -2,12 +2,21 @@ module Intro
   class Engine < ::Rails::Engine
     isolate_namespace Intro
 
-    initializer 'webpacker.proxy' do |app|
+    # use packs from intro via Rack static
+    # file service, to enable webpacker to find them
+    # when running in the host application
+    config.app_middleware.use(
+      Rack::Static,
+      # note! this varies from the webpacker/engine documentation
+      urls: ["/intro-packs"], root: Intro::Engine.root.join("public")
+    )
+
+    initializer "webpacker.proxy" do |app|
       insert_middleware = begin
-                            Intro.webpacker.config.dev_server.present?
-                          rescue
-                            nil
-                          end
+        Intro.webpacker.config.dev_server.present?
+      rescue
+        nil
+      end
       next unless insert_middleware
 
       app.middleware.insert_before(
@@ -16,10 +25,5 @@ module Intro
         webpacker: Intro.webpacker
       )
     end
-
-    config.app_middleware.use(
-      Rack::Static,
-      urls: ['/intro-packs'], root: 'intro/public'
-    )
   end
 end

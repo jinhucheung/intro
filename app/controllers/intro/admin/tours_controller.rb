@@ -44,7 +44,7 @@ module Intro
       def edit; end
 
       def update
-        flash.now[:notice] = t('intro.admin.update_success') if @tour.update_attributes(tour_params)
+        flash.now[:notice] = t('intro.admin.update_success') if @tour.update(tour_params)
         render :edit
       end
 
@@ -54,7 +54,7 @@ module Intro
       end
 
       def publish
-        @tour.update_attributes(published: 'true' == params[:published])
+        @tour.update(published: 'true' == params[:published])
         redirect_to :back
       rescue => e
         redirect_to admin_tours_path

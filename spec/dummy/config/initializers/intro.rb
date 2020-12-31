@@ -12,8 +12,8 @@ Intro.configure do
   # self.max_touch_count = 1
 
   # admin account for accessing backstage, default by SecureRandom#urlsafe_base64
-  self.admin_username = ENV['INTRO_APP_ADMIN_USERNAME'] || "WRDkzl4"
-  self.admin_password = ENV['INTRO_APP_ADMIN_PASSWORD'] || "8ud1c_3vU5idynBN1gE8pUDnDVs"
+  self.admin_username = ENV['INTRO_APP_ADMIN_USERNAME'] || "NQlPV8Q"
+  self.admin_password = ENV['INTRO_APP_ADMIN_PASSWORD'] || "ZZaZHRNDO7yaELLYYlv1FmMEW_Y"
 
   # admin_authenticate_account will override authenticate_acount process for backstage, it should return boolean
   # self.admin_authenticate_account = -> { current_user.try(:has_admin_role?) }
@@ -29,8 +29,8 @@ Intro.configure do
 
   # cache tours status to reduce requests, default: false
   # use `Rails.cache` to store tours status, change `config.cache_store` for different strategies in environment
-  self.cache = true
+  # self.cache = true
 
   # display tour without signing in, default: false
-  self.visible_without_signing_in = true
+  # self.visible_without_signing_in = true
 end

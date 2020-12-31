@@ -9,8 +9,6 @@ require 'intro/helpers/view_helper'
 
 module Intro
   class << self
-    ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
-
     def config
       @config ||= Configuration.new
     end
@@ -25,8 +23,8 @@ module Intro
 
     def webpacker
       @webpacker ||= ::Webpacker::Instance.new(
-        root_path: ROOT_PATH,
-        config_path: ROOT_PATH.join('config', 'webpacker.yml')
+        root_path: Intro::Engine.root,
+        config_path: Intro::Engine.root.join('config', 'webpacker.yml')
       )
     end
   end

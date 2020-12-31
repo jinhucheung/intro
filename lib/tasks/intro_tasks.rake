@@ -13,16 +13,16 @@ end
 
 namespace :intro do
   namespace :webpacker do
-    desc 'Install deps with yarn'
+    desc "Install deps with yarn"
     task :yarn_install do
-      Dir.chdir(File.join(__dir__, '../..')) do
-        system 'yarn install --no-progress --production'
+      Dir.chdir(File.join(__dir__, "../..")) do
+        system "yarn install --no-progress --production"
       end
     end
 
-    desc 'Compile JavaScript packs using webpack for production with digests'
+    desc "Compile JavaScript packs using webpack for production with digests"
     task compile: [:yarn_install, :environment] do
-      Webpacker.with_node_env('production') do
+      Webpacker.with_node_env("production") do
         ensure_log_goes_to_stdout do
           if Intro.webpacker.commands.compile
             # Successful compilation!
