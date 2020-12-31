@@ -1,7 +1,7 @@
 module Intro
   module Helpers
     module ViewHelper
-      def intro_tags(options = {}, &block)
+      def intro_tags(options = {})
         return unless options[:enable] || enable_intro?
 
         intro_options = {
@@ -16,11 +16,14 @@ module Intro
           shepherd_options: options[:shepherd] || {}
         }.freeze
 
+        custom_assets = Intro.config.custom_assets_with_default
+        custom_assets_tag = "#{javascript_pack_tag(custom_assets)} #{stylesheet_pack_tag(custom_assets)}" if custom_assets
+
         <<-HTML.html_safe
           <script>window._intro = #{ intro_options.to_json }</script>
           #{intro_webpacker_helper.javascript_pack_tag('intro/application')}
           #{intro_webpacker_helper.stylesheet_pack_tag('intro/application')}
-          #{capture(&block) if block_given?}
+          #{custom_assets_tag}
         HTML
       end
 

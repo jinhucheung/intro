@@ -36,6 +36,9 @@ module Intro
     # display tour without signing in, default: false
     attr_accessor :visible_without_signing_in
 
+    # override intro tour styles, default: false
+    attr_accessor :custom_assets
+
     def initialize
       @enable = true
 
@@ -46,10 +49,17 @@ module Intro
       @max_touch_count = 1
 
       @carrierwave_storage = :file
+
+      @custom_assets = false
     end
 
     def admin_username_digest
       @admin_username_digest ||= Digest::SHA1.hexdigest(admin_username.to_s)
+    end
+
+    def custom_assets_with_default
+      return unless custom_assets
+      custom_assets.is_a?(String) ? custom_assets : 'intro/custom'
     end
   end
 end

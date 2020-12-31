@@ -91,13 +91,16 @@ app/javascript/packs/intro/custom.js
 
 更改它们以满足你的需要。
 
-最后，在 `intro_tags` 中引入 custom pack 文件。
+最后，在 `config/initializers/intro.rb` 中启用 `custom_assets` 设置。
 
 ```
-<%= intro_tags do %>
-  <%= javascript_pack_tag('intro/custom') %>
-<% end %>
+# config/initializers/intro.rb
+
+# override intro tour styles
+self.custom_assets = true # or 'intro/custom'
 ```
+
+这将会在 `intro_tags` 中引用 `intro/custom` 资源。
 
 ### 配置 Intro
 

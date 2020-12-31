@@ -95,13 +95,16 @@ app/javascript/packs/intro/custom.js
 
 Change them for your need.
 
-Last, import custom packs javascript into `intro_tag` like this:
+Last, enable `custom_assets` in `config/initializers/intro.rb` like this:
 
 ```
-<%= intro_tags do %>
-  <%= javascript_pack_tag('intro/custom') %>
-<% end %>
+# config/initializers/intro.rb
+
+# override intro tour styles
+self.custom_assets = true # or 'intro/custom'
 ```
+
+It will bring intro/custom assets into `intro_tags`
 
 ### Configuring intro
 

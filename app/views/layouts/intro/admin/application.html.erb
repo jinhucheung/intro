@@ -3,8 +3,8 @@
   <head>
     <meta charset='utf-8'>
     <title><%= [yield(:doc_title).presence, t('intro.admin.title')].compact.join(' · ') %></title>
-    <%= stylesheet_pack_tag "intro/admin/application", media: "all" %>
-    <%= javascript_pack_tag "intro/admin/application" %>
+    <%= intro_webpacker_helper.stylesheet_pack_tag "intro/admin/application", media: "all" %>
+    <%= intro_webpacker_helper.javascript_pack_tag "intro/admin/application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head_content) %>
   </head>
