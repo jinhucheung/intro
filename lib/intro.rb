@@ -1,7 +1,6 @@
-require 'shepherdjs_rails'
+require 'webpacker'
 require 'carrierwave'
 require 'kaminari'
-require 'jquery-rails'
 
 require 'intro/engine'
 require 'intro/cache'
@@ -10,6 +9,8 @@ require 'intro/helpers/view_helper'
 
 module Intro
   class << self
+    ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
+
     def config
       @config ||= Configuration.new
     end
@@ -20,6 +21,13 @@ module Intro
 
     def cache
       Intro::Cache
+    end
+
+    def webpacker
+      @webpacker ||= ::Webpacker::Instance.new(
+        root_path: ROOT_PATH,
+        config_path: ROOT_PATH.join('config', 'webpacker.yml')
+      )
     end
   end
 end

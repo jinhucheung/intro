@@ -18,8 +18,8 @@ module Intro
 
         <<-HTML.html_safe
           <script>window._intro = #{ intro_options.to_json }</script>
-          #{javascript_include_tag('intro/application')}
-          #{stylesheet_link_tag('intro/application')}
+          #{javascript_pack_tag('intro/application')}
+          #{stylesheet_pack_tag('intro/application')}
         HTML
       end
 

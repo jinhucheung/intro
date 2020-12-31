@@ -13,18 +13,15 @@ Gem::Specification.new do |s|
   s.summary     = "Intro brings your rails application to new feature introduction and step-by-step users guide"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*", "package.json", "postcss.config.js", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", ">= 3.2"
+  s.add_dependency "rails", "~> 6.0"
   s.add_dependency "carrierwave"
   s.add_dependency "kaminari", ">= 0.17.0"
-  s.add_dependency "sprockets"
-  s.add_dependency "shepherdjs_rails", "4.6.0"
-  s.add_dependency "jquery-rails"
-  s.add_dependency "sass-rails"
+  s.add_dependency "webpacker"
 
-  s.add_development_dependency "sqlite3", "1.3.13"
+  s.add_development_dependency "sqlite3", "1.4"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "shoulda-matchers"
