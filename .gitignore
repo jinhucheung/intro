@@ -13,4 +13,6 @@ spec/dummy/public/uploads/
 .idea
 node_modules/
 public/intro-packs
+public/intro-packs/manifest.json
 yarn-error.log
+tmp/cache/webpacker/

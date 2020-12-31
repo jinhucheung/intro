@@ -49,10 +49,10 @@ Then do migrate:
 $ rails db:migrate
 ```
 
-Compile intro assets:
+Compile assets:
 
 ```
-$ rails intro:webpacker:compile
+$ rails assets:precompile
 ```
 
 ## Usage
@@ -88,11 +88,20 @@ $ rails generate intro:assets
 Then you would get the asset files:
 
 ```
-app/javascript/stylesheets/intro/shepherd/_variables.scss
-app/javascript/stylesheets/intro/shepherd/base.scss
+app/javascript/stylesheets/intro/_variables.scss
+app/javascript/stylesheets/intro/custom.scss
+app/javascript/packs/intro/custom.js
 ```
 
 Change them for your need.
+
+Last, import custom packs javascript into `intro_tag` like this:
+
+```
+<%= intro_tags do %>
+  <%= javascript_pack_tag('intro/custom') %>
+<% end %>
+```
 
 ### Configuring intro
 

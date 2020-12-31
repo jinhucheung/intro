@@ -1,7 +1,7 @@
 module Intro
   module Helpers
     module ViewHelper
-      def intro_tags(options = {})
+      def intro_tags(options = {}, &block)
         return unless options[:enable] || enable_intro?
 
         intro_options = {
@@ -25,6 +25,7 @@ module Intro
           <script>window._intro = #{ intro_options.to_json }</script>
           #{intro_helper.javascript_pack_tag('intro/application')}
           #{intro_helper.stylesheet_pack_tag('intro/application')}
+          #{capture(&block) if block_given?}
         HTML
       end
 

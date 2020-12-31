@@ -13,7 +13,7 @@ Intro::Engine.routes.draw do
 
       collection do
         get  :route
-        post :attempt
+        match :attempt, via: [:post, :put, :patch]
       end
     end
 

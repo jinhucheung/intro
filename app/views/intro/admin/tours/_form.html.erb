@@ -1,4 +1,5 @@
 <%= form_for @tour, url: url, html: { class: "intro-admin__form intro-admin__tour-form #{yield(:tour_form_class)}" } do |f| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <% if @tour.errors.any? %>
     <div class='field error'>
       <div class='message list'>
@@ -157,7 +158,7 @@
       $.ajax({
         method: 'POST',
         url: "<%= attempt_admin_tours_path %>",
-        data: $form.serialize().replace(/&_method=(put|patch)&/i, '&_method=post&'),
+        data: $form.serialize(),
         beforeSend: function () {
           $this.addClass('intro-loading')
           introTour && introTour.hide()
